@@ -3,13 +3,13 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 class ANSI():
-    def background(code):
+    def background(self, code):
         return "\33[{code}m".format(code=code)
 
-    def style_text(code):
+    def style_text(self, code):
         return "\33[{code}m".format(code=code)
 
-    def color_text(code):
+    def color_text(self, code):
         return "\33[{code}m".format(code=code)
 
 
@@ -18,8 +18,12 @@ class GAME():
     player_name = input('Enter your name:')
     player_score = 0
     computer_score = 0
+    player_ships = []
+    computer_ships = []
+    player_board = []
+    computer_board = []
 
 
 example_ansi = ANSI.background(
-    97) + ANSI.color_text(96) + "HELLO "
+    ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
 print(example_ansi)
