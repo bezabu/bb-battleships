@@ -14,30 +14,37 @@ class ANSI():
 
 
 class GAME():
+    # player_name = ""
+    blank = " "
     board_size = 7
-    player_name = input('Enter your name:')
     player_score = 0
     computer_score = 0
     player_ships = []
     computer_ships = []
-    board_label = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+    board_label = [
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     blank = " "
     player_board = []
     for n in range(board_size):
         newlist = []
         player_board.append(newlist)
         for m in range(board_size):
-            player_board[n].append("P") 
+            player_board[n].append("P")
     computer_board = []
     for n in range(board_size):
         newlist = []
         computer_board.append(newlist)
         for m in range(board_size):
-            computer_board[n].append("C") 
+            computer_board[n].append("C")
 
+    def __init__(self, board):
+        print("Welcome to\n")
+        GAME.player_name = input('Enter your name:')
+        print(f"Hello {GAME.player_name}!\n")
+      
     def print_boards(self):
-        print(f"      {self.player_name}'s board" + self.blank * (35 - len(self.player_name)) + "Computer's board")
-        
+        print(f"    {self.player_name}'s board" + self.blank * (
+            35 - len(self.player_name)) + "Computer's board")
         # upper label row
         # player
         line_print_0 = " ┌" + f"───┬"
@@ -115,7 +122,7 @@ class GAME():
         print(line_print_3)
 
 
-example_ansi = ANSI.background(
-    ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
-print("\n")
+# example_ansi = ANSI.background(
+    # ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
+game = GAME(7)
 GAME.print_boards(GAME)
