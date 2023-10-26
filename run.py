@@ -14,16 +14,64 @@ class ANSI():
 
 
 class GAME():
-    board_size = 5
+    board_size = 8
     player_name = input('Enter your name:')
     player_score = 0
     computer_score = 0
     player_ships = []
     computer_ships = []
+    board_label = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     player_board = []
+    for n in range(board_size):
+        newlist = []
+        player_board.append(newlist)
+        for m in range(board_size):
+            player_board[n].append(" ") 
     computer_board = []
+
+    def print_boards(self):
+        # upper label row
+        line_print_0 = " ┌" + f"───┬"
+        line_print_1 = " │" + f"   │"
+        for n in range(self.board_size):
+            line_print_0 += f"───┬"
+            line_print_1 += f" {str(self.board_label[n])} │"
+        line_print_0 += "───┐"
+        line_print_1 += "   │"
+        print(line_print_0)
+        print(line_print_1)
+        # main body of board
+        for n in range(self.board_size):
+            line_print_0 = " ├" + f"───┼"
+            line_print_1 = " │" + f" {str(n+1)} │"
+            line_print_3 = " ├" + f"───┼"
+            for m in range(self.board_size):
+                line_print_0 += "───┼"
+                line_print_1 += " " + str(self.player_board[0][m]) + " │"
+                line_print_3 += "───┴"
+            line_print_0 += f"───┤"
+            line_print_1 += f" {str(n+1)} │"
+            line_print_3 += f"───┘"
+            print(line_print_0)
+            print(line_print_1)
+        # lower label row
+        line_print_0 = " ├" + f"───┼"
+        line_print_1 = " │" + f"   │"
+        for n in range(self.board_size):
+            line_print_0 += f"───┼"
+            line_print_1 += f" {str(self.board_label[n])} │"
+        line_print_0 += "───┤"
+        line_print_1 += "   │"
+        print(line_print_0)
+        print(line_print_1)
+        line_print_3 = " └" + "───┴"
+        for m in range(self.board_size):
+            line_print_3 += "───┴"
+        line_print_3 += "───┘"
+        print(line_print_3)
 
 
 example_ansi = ANSI.background(
     ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
 print(example_ansi)
+GAME.print_boards(GAME)
