@@ -39,9 +39,17 @@ class GAME():
 
     def __init__(self, board):
         print("Welcome to\n")
+        f = open("banner.txt", "r")
+        print(ANSI.color_text(ANSI, 31) + f.readline())
+        print(f.readline())
+        print(f.readline())
+        print(f.readline())
+        print(f.readline())
+        f.close()
+        print(ANSI.color_text(ANSI, 37) + "\n")
         GAME.player_name = input('Enter your name:')
-        print(f"Hello {GAME.player_name}!\n")
-      
+        print(f"\nHello {GAME.player_name}!\n")
+     
     def print_boards(self):
         print(f"    {self.player_name}'s board" + self.blank * (
             35 - len(self.player_name)) + "Computer's board")
