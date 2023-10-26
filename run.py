@@ -14,13 +14,14 @@ class ANSI():
 
 
 class GAME():
-    board_size = 8
+    board_size = 7
     player_name = input('Enter your name:')
     player_score = 0
     computer_score = 0
     player_ships = []
     computer_ships = []
     board_label = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+    blank = " "
     player_board = []
     for n in range(board_size):
         newlist = []
@@ -35,7 +36,8 @@ class GAME():
             computer_board[n].append("C") 
 
     def print_boards(self):
-        print(f"      {self.player_name}'s board")
+        print(f"      {self.player_name}'s board" + self.blank * (35 - len(self.player_name)) + "Computer's board")
+        
         # upper label row
         # player
         line_print_0 = " ┌" + f"───┬"
