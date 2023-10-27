@@ -25,26 +25,21 @@ class GAME():
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     blank = " "
     player_board = []
-    for n in range(board_size):
-        newlist = []
-        player_board.append(newlist)
-        for m in range(board_size):
-            player_board[n].append("P")
     computer_board = []
     for n in range(board_size):
         newlist = []
-        computer_board.append(newlist)
+        newlist2 = []
+        player_board.append(newlist)
+        computer_board.append(newlist2)
         for m in range(board_size):
-            computer_board[n].append("C")
+            player_board[n].append("P")
+            computer_board[n].append("C")   
 
     def __init__(self, board):
         print("Welcome to\n")
         f = open("banner.txt", "r")
-        print(ANSI.color_text(ANSI, 31) + f.readline())
-        print(f.readline())
-        print(f.readline())
-        print(f.readline())
-        print(f.readline())
+        for x in f:
+            print(ANSI.color_text(ANSI, 31) + x.replace('\n', ' '))
         f.close()
         print(ANSI.color_text(ANSI, 37) + "\n")
         GAME.player_name = input('Enter your name:')
@@ -130,7 +125,10 @@ class GAME():
         print(line_print_3)
 
 
+def main():
+    game = GAME(7)
+    GAME.print_boards(GAME)
 # example_ansi = ANSI.background(
     # ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
-game = GAME(7)
-GAME.print_boards(GAME)
+main()
+
