@@ -21,8 +21,8 @@ class GAME():
     # board_size = 7
     player_score = 0
     computer_score = 0
-    player_ships = []
-    computer_ships = []
+    # player_ships = []
+    # computer_ships = []
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     blank = " "
@@ -40,6 +40,30 @@ class GAME():
         self.make_boards()
         # GAME.player_name = input('Enter your name:')
         # print(f"\nHello {GAME.player_name}!\n")
+        print("Would you like to choose your ship locations?")
+        while True:
+            choose = input("Y/N: ").upper()
+            if choose.__contains__('N'):
+                print("Setting player ships...")
+                self.player_ships = self.random_assign(self.board_size)
+                break
+            elif choose.__contains__('Y'):
+                print("Enter ship location as letternumber")
+                print("For example: A1\n")
+                self.player_ships = self.random_assign(self.board_size)
+                break
+            else:
+                False
+        print("Setting computer ships...")
+        self.computer_ships = self.random_assign(self.board_size)
+        print(self.player_ships)
+        self.set_board(self.player_board, self.player_ships)
+
+    def set_board(self, board, ships):
+        for n in ships:
+            letter = ord(n[0]) - 64
+            number = int(n[1])
+            board[number-1][letter-1] = "@"
 
     def validate_name(self, vname):
         try:
@@ -96,7 +120,7 @@ class GAME():
             line_print_3 = " ├" + f"───┼"
             for m in range(self.board_size):
                 line_print_0 += "───┼"
-                line_print_1 += " " + str(self.player_board[0][m]) + " │"
+                line_print_1 += " " + str(self.player_board[n][m]) + " │"
                 line_print_3 += "───┴"
             line_print_0 += f"───┤"
             line_print_1 += f" {str(n+1)} │"
@@ -107,7 +131,7 @@ class GAME():
             line_print_3 += " ├" + f"───┼"
             for m in range(self.board_size):
                 line_print_0 += "───┼"
-                line_print_1 += " " + str(self.computer_board[0][m]) + " │"
+                line_print_1 += " " + str(self.computer_board[n][m]) + " │"
                 line_print_3 += "───┴"
             line_print_0 += f"───┤"
             line_print_1 += f" {str(n+1)} │"
@@ -151,16 +175,18 @@ class GAME():
         for n in range(self.board_size):
             letter_list.append(self.board_label[n])
         for n in range(ship_count):
-            while False:
+            while True:
                 new_coord = make_coord(letter_list, self.board_size)
                 if new_coord not in ship_list:
-                    ship_list[n] = new_coord
-                    break   
+                    ship_list.append(new_coord)
+                    break
+        # print(ship_list)
+        return ship_list
 
 
 def make_coord(letters, maxnumber):
     cha = random.choice(letters)
-    num = str(round(random.randrange(0, maxnumber)))
+    num = str(round(random.randrange(0, maxnumber))+1)
     return cha + num
 
 
@@ -198,6 +224,7 @@ def get_name(owner):
 def main():
     game = GAME(7)
     game.print_boards()
+    game.random_assign(game.board_size)
 
 
 # example_ansi = ANSI.background(
