@@ -1,6 +1,8 @@
+import random
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+
 
 class ANSI():
     def background(self, code):
@@ -33,7 +35,7 @@ class GAME():
         f.close()
         print(ANSI.color_text(ANSI, 37) + "\n")
         self.player_name = get_name(self)
-        print("Please set the size of the game board.\n")
+        print("Please set the size of the game board.")
         self.board_size = get_board_size()
         self.make_boards()
         # GAME.player_name = input('Enter your name:')
@@ -64,8 +66,9 @@ class GAME():
                 self.computer_board[n].append("C")
 
     def print_boards(self):
-        print(f"    {self.player_name}'s board" + self.blank * (
-            35 - len(self.player_name)) + "Computer's board")
+        blankspace = (((self.board_size*4)+9)*2)-24
+        print(f" {self.player_name}'s board" + self.blank * (
+            blankspace - len(self.player_name)) + "Computer's board")
         # upper label row
         # player
         line_print_0 = " ┌" + f"───┬"
@@ -142,12 +145,30 @@ class GAME():
         line_print_3 += "───┘"
         print(line_print_3)
 
+    def random_assign(self, ship_count):
+        ship_list = []
+        letter_list = []
+        for n in range(self.board_size):
+            letter_list.append(self.board_label[n])
+        for n in range(ship_count):
+            while False:
+                new_coord = make_coord(letter_list, self.board_size)
+                if new_coord not in ship_list:
+                    ship_list[n] = new_coord
+                    break   
+
+
+def make_coord(letters, maxnumber):
+    cha = random.choice(letters)
+    num = str(round(random.randrange(0, maxnumber)))
+    return cha + num
+
 
 def get_board_size():
     while True:
         size = input("Please enter a number between 5 and 7: ")
         if validate_size(size):
-            print(f"Board size set to {size} x {size}")
+            print(f"Board size set to {size} x {size}\n")
             break
     return int(size)
 
@@ -169,7 +190,7 @@ def get_name(owner):
     while True:
         name = input('Please enter your name:')
         if owner.validate_name(name):
-            print(f"\nHello {name}!\n")
+            print(f"\nHello {name}!")
             break
     return name
 
