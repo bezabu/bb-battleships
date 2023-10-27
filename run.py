@@ -21,10 +21,13 @@ class GAME():
     # board_size = 7
     player_score = 0
     computer_score = 0
+    player_guesses = []
+    computer_guesses = []
     # player_ships = []
     # computer_ships = []
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+    win = False
 
     def __init__(self, board):
         """
@@ -58,7 +61,6 @@ class GAME():
                 False
         print("Setting computer ships...")
         self.computer_ships = self.random_assign(self.board_size)
-        print(self.player_ships)
         self.set_board(self.player_board, self.player_ships)
 
     def set_board(self, board, ships):
@@ -68,7 +70,7 @@ class GAME():
         for n in ships:
             letter = ord(n[0]) - 64
             number = int(n[1])
-            board[number-1][letter-1] = "@"
+            board[number - 1][letter - 1] = "@"
 
     def choose_ship(self):
         """
@@ -80,11 +82,10 @@ class GAME():
         print("Enter ship location as letternumber,")
         print("for example: A1")
         for n in range(allowed):
-            print(ships)
             print(f"{allowed - used} ships remaining.")
             while True:
                 new_ship = input("Enter coordinates:")
-                if validate_coord(new_ship, self.board_size):
+                if validate_coord(new_ship, self.board_size, ships):
                     ships.append(new_ship)
                     used += 1
                     break
@@ -103,6 +104,7 @@ class GAME():
                     f"Name is {len(name)} characters,\nmust be less than 30"
                 )
         except ValueError as e:
+            self.print_boards()
             print(f"Invalid data: {e}. Please try again.\n")
             return False
         return True
@@ -148,21 +150,34 @@ class GAME():
         for n in range(self.board_size):
             # player
             print(" │", end="")
-            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
+            print(ANSI.col_txt(ANSI, 37), end="")
+            print(f" {str(n+1)} ", end="")
             print(ANSI.col_txt(ANSI, 32) + "│", end="")
             for m in range(self.board_size):
-                print(ANSI.col_txt(
-                    ANSI, 37) + f" {str(self.player_board[n][m])}", end="")
+                if str(self.player_board[n][m]) == "@":
+                    # if computer has guessed here
+                    b = str(self.board_label[m])+str(n)
+                    if b in self.computer_guesses:
+                        print(ANSI.col_txt(ANSI, 31), end="")
+                    else:
+                        print(ANSI.col_txt(ANSI, 37), end="")
+                elif str(self.player_board[n][m]) == "X":
+                    print(ANSI.col_txt(ANSI, 34), end="")
+                print(f" {str(self.player_board[n][m])}", end="")
                 print(ANSI.col_txt(ANSI, 32) + " │", end="")
-            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
+            print(ANSI.col_txt(ANSI, 37), end="")
+            print(f" {str(n+1)} ", end="")
             print(ANSI.col_txt(ANSI, 32) + "│", end="")
             # computer
             print(" │", end="")
             print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
             print(ANSI.col_txt(ANSI, 32) + "│", end="")
             for m in range(self.board_size):
-                print(ANSI.col_txt(
-                    ANSI, 37) + f" {str(self.computer_board[n][m])}", end="")
+                if str(self.computer_board[n][m]) == "@":
+                    print(ANSI.col_txt(ANSI, 31), end="")
+                elif str(self.computer_board[n][m]) == "X":
+                    print(ANSI.col_txt(ANSI, 34), end="")
+                print(f" {str(self.computer_board[n][m])}", end="")
                 print(ANSI.col_txt(ANSI, 32) + " │", end="")
             print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
             print(ANSI.col_txt(ANSI, 32) + "│", end="")
@@ -181,6 +196,7 @@ class GAME():
                 line_print += "───┴"
             line_print += "───┘"
         print(line_print)
+        print(ANSI.col_txt(ANSI, 37))
 
     def random_assign(self, ship_count):
         """
@@ -205,7 +221,7 @@ def make_coord(letters, maxnumber):
     Chooses a random coordinate
     """
     cha = random.choice(letters)
-    num = str(round(random.randrange(0, maxnumber))+1)
+    num = str(round(random.randrange(0, maxnumber)))
     return cha + num
 
 
@@ -221,7 +237,7 @@ def get_board_size():
     return int(size)
 
 
-def validate_coord(coords, size):
+def validate_coord(coords, size, ships):
     """
     Validate user inputted coordinates to match game formatting
     """
@@ -229,13 +245,14 @@ def validate_coord(coords, size):
         for n in coords:
             letter = ord(coords[0]) - 64
             number = int(coords[1])
-            print(letter)
-            print(number)
             if letter - 1 < 0 or letter - 1 >= size:
                 raise ValueError(f"{coords} is not a valid coordinate")
             if number - 1 < 0 or number - 1 >= size:
                 raise ValueError(f"{coords} is not a valid coordinate")
-            # check if coord already entered 
+            if coords in ships:
+                raise ValueError(f"{coords} already used")
+            if len(coords) > 2:
+                raise ValueError(f"{coords} is not 1 letter and 1 number")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
@@ -293,10 +310,80 @@ def label_line(owner):
     print("   │", end="")
 
 
+def guess(owner, player):
+    """
+    Get input from the player, validate and compare to computer's ships
+    """
+    guess = ""
+    if player is True:
+        ships = owner.player_guesses
+        while True:
+            guess = input("Enter coordinates: ")
+            if validate_coord(guess, owner.board_size, ships):
+                break
+    else:
+        ships = owner.computer_guesses
+        letter_list = []
+        for n in range(owner.board_size):
+            letter_list.append(owner.board_label[n])
+        while True:
+            guess = make_coord(letter_list, owner.board_size)
+            if guess not in owner.computer_guesses:
+                break
+    letter = ord(guess[0]) - 64
+    number = int(guess[1])
+    if player is True:
+        owner.player_guesses.append(guess)
+        if guess in owner.computer_ships:
+            # hit
+            print("Hit!")
+            owner.computer_board[number - 1][letter - 1] = "@"
+            owner.player_score += 1
+            if owner.player_score >= owner.board_size:
+                print(f"{owner.player_name} won!")
+                quit()
+        else:
+            # miss
+            print("Miss!")
+            owner.computer_board[number - 1][letter - 1] = "X"
+    if player is False:
+        owner.computer_guesses.append(guess)
+        print(f"Computer chooses {guess}...")
+        if guess in owner.player_ships:
+            # hit
+            print("Hit!")
+            owner.computer_score += 1
+            if owner.computer_score >= owner.board_size:
+                print(f"Computer won!")
+                quit()
+        else:
+            # miss
+            print("Miss!")
+            owner.player_board[number - 1][letter - 1] = "X"
+
+
 def main():
     game = GAME(7)
     game.print_boards()
-    game.random_assign(game.board_size)
+    # game.random_assign(game.board_size)
+    while game.win is False:
+        # turn
+        print(game.computer_ships)
+        print("Your turn! Enter a location as letternumber,", end="")
+        print("for example: A1")
+        guess(game, True)
+        print("Computer's turn...", end="")
+        guess(game, False)
+        game.print_boards()
+    # get input from player
+    # validate coords
+    # check against computers board
+    # computer guess
+    # check against player board
+    # update boards
+    # display boards
+    # display messages
+    print("no winner yet")
     for n in range(8):
         print("1234567890", end="")
     print("")
