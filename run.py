@@ -48,11 +48,12 @@ class GAME():
                 self.player_ships = self.random_assign(self.board_size)
                 break
             elif choose.__contains__('Y'):
-                print("Enter ship location as letternumber")
-                print("For example: A1\n")
+                print("Enter ship location as letternumber,")
+                print("for example: A1\n")
                 self.player_ships = self.random_assign(self.board_size)
                 break
             else:
+                print("Please enter Y for yes or N for no.")
                 False
         print("Setting computer ships...")
         self.computer_ships = self.random_assign(self.board_size)
@@ -64,6 +65,11 @@ class GAME():
             letter = ord(n[0]) - 64
             number = int(n[1])
             board[number-1][letter-1] = "@"
+
+    def choose_ship(self):
+        """
+        Allow player to choose ship locations by entering char-int
+        """
 
     def validate_name(self, vname):
         try:
