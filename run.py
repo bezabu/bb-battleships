@@ -16,7 +16,7 @@ class ANSI():
 class GAME():
     # player_name = ""
     blank = " "
-    board_size = 7
+    # board_size = 7
     player_score = 0
     computer_score = 0
     player_ships = []
@@ -24,16 +24,6 @@ class GAME():
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     blank = " "
-    player_board = []
-    computer_board = []
-    for n in range(board_size):
-        newlist = []
-        newlist2 = []
-        player_board.append(newlist)
-        computer_board.append(newlist2)
-        for m in range(board_size):
-            player_board[n].append("P")
-            computer_board[n].append("C")   
 
     def __init__(self, board):
         print("Welcome to\n")
@@ -42,9 +32,37 @@ class GAME():
             print(ANSI.color_text(ANSI, 31) + x.replace('\n', ' '))
         f.close()
         print(ANSI.color_text(ANSI, 37) + "\n")
-        GAME.player_name = input('Enter your name:')
-        print(f"\nHello {GAME.player_name}!\n")
-     
+        self.player_name = get_name(self)
+        print("Please set the size of the game board.\n")
+        self.board_size = get_board_size()
+        self.make_boards()
+        # GAME.player_name = input('Enter your name:')
+        # print(f"\nHello {GAME.player_name}!\n")
+
+    def validate_name(self, vname):
+        try:
+            name = str(vname)
+            if len(name) > 30:
+                raise ValueError(
+                    f"Name is {len(name)} characters,\nmust be less than 30"
+                )
+        except ValueError as e:
+            print(f"Invalid data: {e}. Please try again.\n")
+            return False
+        return True
+
+    def make_boards(self):
+        self.player_board = []
+        self.computer_board = []
+        for n in range(self.board_size):
+            self.newlist = []
+            self.newlist2 = []
+            self.player_board.append(self.newlist)
+            self.computer_board.append(self.newlist2)
+            for m in range(self.board_size):
+                self.player_board[n].append("P")
+                self.computer_board[n].append("C")
+
     def print_boards(self):
         print(f"    {self.player_name}'s board" + self.blank * (
             35 - len(self.player_name)) + "Computer's board")
@@ -125,10 +143,42 @@ class GAME():
         print(line_print_3)
 
 
+def get_board_size():
+    while True:
+        size = input("Please enter a number between 5 and 7: ")
+        if validate_size(size):
+            print(f"Board size set to {size} x {size}")
+            break
+    return int(size)
+
+
+def validate_size(vsize):
+    try:
+        size = int(vsize)
+        if size < 5 or size > 7:
+            raise ValueError(
+                f"Board size must be between 5 and 7, you entered {size}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}. Please try again.\n")
+        return False
+    return True
+
+
+def get_name(owner):
+    while True:
+        name = input('Please enter your name:')
+        if owner.validate_name(name):
+            print(f"\nHello {name}!\n")
+            break
+    return name
+
+
 def main():
     game = GAME(7)
-    GAME.print_boards(GAME)
+    game.print_boards()
+
+
 # example_ansi = ANSI.background(
     # ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
 main()
-
