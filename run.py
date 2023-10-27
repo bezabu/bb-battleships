@@ -8,10 +8,10 @@ class ANSI():
     def background(self, code):
         return "\33[{code}m".format(code=code)
 
-    def style_text(self, code):
+    def sty_txt(self, code):
         return "\33[{code}m".format(code=code)
 
-    def color_text(self, code):
+    def col_txt(self, code):
         return "\33[{code}m".format(code=code)
 
 
@@ -31,9 +31,9 @@ class GAME():
         print("Welcome to\n")
         f = open("banner.txt", "r")
         for x in f:
-            print(ANSI.color_text(ANSI, 31) + x.replace('\n', ' '))
+            print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
         f.close()
-        print(ANSI.color_text(ANSI, 37) + "\n")
+        print(ANSI.col_txt(ANSI, 37) + "\n")
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
         self.board_size = get_board_size()
@@ -92,88 +92,68 @@ class GAME():
             self.player_board.append(self.newlist)
             self.computer_board.append(self.newlist2)
             for m in range(self.board_size):
-                self.player_board[n].append("P")
-                self.computer_board[n].append("C")
+                self.player_board[n].append(" ")
+                self.computer_board[n].append(" ")
 
     def print_boards(self):
+        """
+        Display the game boards
+        """
         blankspace = (((self.board_size*4)+9)*2)-24
         print(f" {self.player_name}'s board" + self.blank * (
             blankspace - len(self.player_name)) + "Computer's board")
-        # upper label row
-        # player
-        line_print_0 = " ┌" + f"───┬"
-        line_print_1 = " │" + f"   │"
+        # top row
+        # line_print = ""
+        for n in range(2):
+            line_print = " ┌"
+            for m in range(self.board_size+1):
+                line_print += "───┬"
+            line_print += "───┐"
+            print(ANSI.col_txt(ANSI, 32) + line_print, end="")
+        print("")
+        label_line(self)
+        label_line(self)
+        print("")
+        new_line(self.board_size)
+        new_line(self.board_size)
+        print("")
+        # game row
         for n in range(self.board_size):
-            line_print_0 += f"───┬"
-            line_print_1 += f" {str(self.board_label[n])} │"
-        line_print_0 += "───┐"
-        line_print_1 += "   │"
-        # computer
-        line_print_0 += " ┌" + f"───┬"
-        line_print_1 += " │" + f"   │"
-        for n in range(self.board_size):
-            line_print_0 += f"───┬"
-            line_print_1 += f" {str(self.board_label[n])} │"
-        line_print_0 += "───┐"
-        line_print_1 += "   │"
-        print(ANSI.color_text(ANSI, 32) + line_print_0)
-        print(line_print_1)
-        # main body of board
-        # player
-        for n in range(self.board_size):
-            line_print_0 = " ├" + f"───┼"
-            line_print_1 = " │" + f" {str(n+1)} │"
-            line_print_3 = " ├" + f"───┼"
+            # player
+            print(" │", end="")
+            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
+            print(ANSI.col_txt(ANSI, 32) + "│", end="")
             for m in range(self.board_size):
-                line_print_0 += "───┼"
-                line_print_1 += " " + str(self.player_board[n][m]) + " │"
-                line_print_3 += "───┴"
-            line_print_0 += f"───┤"
-            line_print_1 += f" {str(n+1)} │"
-            line_print_3 += f"───┘"
+                print(ANSI.col_txt(
+                    ANSI, 37) + f" {str(self.player_board[n][m])}", end="")
+                print(ANSI.col_txt(ANSI, 32) + " │", end="")
+            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
+            print(ANSI.col_txt(ANSI, 32) + "│", end="")
             # computer
-            line_print_0 += " ├" + f"───┼"
-            line_print_1 += " │" + f" {str(n+1)} │"
-            line_print_3 += " ├" + f"───┼"
+            print(" │", end="")
+            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
+            print(ANSI.col_txt(ANSI, 32) + "│", end="")
             for m in range(self.board_size):
-                line_print_0 += "───┼"
-                line_print_1 += " " + str(self.computer_board[n][m]) + " │"
-                line_print_3 += "───┴"
-            line_print_0 += f"───┤"
-            line_print_1 += f" {str(n+1)} │"
-            line_print_3 += f"───┘"
-            # print(line_print_0)
-            # print(line_print_1)
-            print(line_print_0)
-            print(line_print_1)
-        # lower label row
-        # player
-        line_print_0 = " ├" + f"───┼"
-        line_print_1 = " │" + f"   │"
-        for n in range(self.board_size):
-            line_print_0 += f"───┼"
-            line_print_1 += f" {str(self.board_label[n])} │"
-        line_print_0 += "───┤"
-        line_print_1 += "   │"
-        # computer
-        line_print_0 += " ├" + f"───┼"
-        line_print_1 += " │" + f"   │"
-        for n in range(self.board_size):
-            line_print_0 += f"───┼"
-            line_print_1 += f" {str(self.board_label[n])} │"
-        line_print_0 += "───┤"
-        line_print_1 += "   │"
-        print(line_print_0)
-        print(line_print_1)
-        line_print_3 = " └" + "───┴"
-        for m in range(self.board_size):
-            line_print_3 += "───┴"
-        line_print_3 += "───┘"
-        line_print_3 += " └" + "───┴"
-        for m in range(self.board_size):
-            line_print_3 += "───┴"
-        line_print_3 += "───┘"
-        print(line_print_3)
+                print(ANSI.col_txt(
+                    ANSI, 37) + f" {str(self.computer_board[n][m])}", end="")
+                print(ANSI.col_txt(ANSI, 32) + " │", end="")
+            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
+            print(ANSI.col_txt(ANSI, 32) + "│", end="")
+            print("")
+            new_line(self.board_size)
+            new_line(self.board_size)
+            print("")
+        # bottom row
+        label_line(self)
+        label_line(self)
+        print("")
+        line_print = ""
+        for n in range(2):
+            line_print += " └"
+            for n in range(self.board_size+1):
+                line_print += "───┴"
+            line_print += "───┘"
+        print(line_print)
 
     def random_assign(self, ship_count):
         ship_list = []
@@ -227,10 +207,29 @@ def get_name(owner):
     return name
 
 
+def new_line(size):
+    print(" ├", end="")
+    for n in range(size+1):
+        print("───┼", end="")
+    print("───┤", end="")
+
+
+def label_line(owner):
+    print(" │   │", end="")
+    for n in range(owner.board_size):
+        print(ANSI.col_txt(
+            ANSI, 37) + f" {str(owner.board_label[n])} ", end="")
+        print(ANSI.col_txt(ANSI, 32) + "│", end="")
+    print("   │", end="")
+
+
 def main():
     game = GAME(7)
     game.print_boards()
     game.random_assign(game.board_size)
+    for n in range(8):
+        print("1234567890", end="")
+    print("")
 
 
 # example_ansi = ANSI.background(
