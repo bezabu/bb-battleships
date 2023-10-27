@@ -25,10 +25,12 @@ class GAME():
     # computer_ships = []
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
-    blank = " "
 
     def __init__(self, board):
-        print("Welcome to\n")
+        """
+        Create game instance and get player info and settings
+        """
+        print("                                 Welcome to\n")
         f = open("banner.txt", "r")
         for x in f:
             print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
@@ -48,9 +50,8 @@ class GAME():
                 self.player_ships = self.random_assign(self.board_size)
                 break
             elif choose.__contains__('Y'):
-                print("Enter ship location as letternumber,")
-                print("for example: A1\n")
-                self.player_ships = self.random_assign(self.board_size)
+                # assign ship locations function
+                self.player_ships = self.choose_ship()
                 break
             else:
                 print("Please enter Y for yes or N for no.")
@@ -61,6 +62,9 @@ class GAME():
         self.set_board(self.player_board, self.player_ships)
 
     def set_board(self, board, ships):
+        """
+        Update the board with the ship positions
+        """
         for n in ships:
             letter = ord(n[0]) - 64
             number = int(n[1])
@@ -70,8 +74,28 @@ class GAME():
         """
         Allow player to choose ship locations by entering char-int
         """
+        ships = []
+        used = 0
+        allowed = self.board_size
+        print("Enter ship location as letternumber,")
+        print("for example: A1")
+        for n in range(allowed):
+            print(ships)
+            print(f"{allowed - used} ships remaining.")
+            while True:
+                new_ship = input("Enter coordinates:")
+                if validate_coord(new_ship, self.board_size):
+                    ships.append(new_ship)
+                    used += 1
+                    break
+            print("Your ship locations are: ", end="")
+            print(ships)
+        return ships
 
     def validate_name(self, vname):
+        """
+        Check if name entered is less than 30 characters long
+        """
         try:
             name = str(vname)
             if len(name) > 30:
@@ -84,6 +108,9 @@ class GAME():
         return True
 
     def make_boards(self):
+        """
+        Create the 2 dimensional arrays to store board info
+        """
         self.player_board = []
         self.computer_board = []
         for n in range(self.board_size):
@@ -156,6 +183,9 @@ class GAME():
         print(line_print)
 
     def random_assign(self, ship_count):
+        """
+        Returns a list of randomly selected positions
+        """
         ship_list = []
         letter_list = []
         for n in range(self.board_size):
@@ -171,12 +201,18 @@ class GAME():
 
 
 def make_coord(letters, maxnumber):
+    """
+    Chooses a random coordinate
+    """
     cha = random.choice(letters)
     num = str(round(random.randrange(0, maxnumber))+1)
     return cha + num
 
 
 def get_board_size():
+    """
+    Prompt the user to select a board size
+    """
     while True:
         size = input("Please enter a number between 5 and 7: ")
         if validate_size(size):
@@ -185,7 +221,31 @@ def get_board_size():
     return int(size)
 
 
+def validate_coord(coords, size):
+    """
+    Validate user inputted coordinates to match game formatting
+    """
+    try:
+        for n in coords:
+            letter = ord(coords[0]) - 64
+            number = int(coords[1])
+            print(letter)
+            print(number)
+            if letter - 1 < 0 or letter - 1 >= size:
+                raise ValueError(f"{coords} is not a valid coordinate")
+            if number - 1 < 0 or number - 1 >= size:
+                raise ValueError(f"{coords} is not a valid coordinate")
+            # check if coord already entered 
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+    return True
+
+
 def validate_size(vsize):
+    """
+    Ensure the board size in an integer between 5 and 7
+    """
     try:
         size = int(vsize)
         if size < 5 or size > 7:
@@ -199,6 +259,9 @@ def validate_size(vsize):
 
 
 def get_name(owner):
+    """
+    Prompt the user to enter their name
+    """
     while True:
         name = input('Please enter your name:')
         if owner.validate_name(name):
@@ -208,6 +271,9 @@ def get_name(owner):
 
 
 def new_line(size):
+    """
+    For use in the print_boards function, draws a horizontal line
+    """
     print(" ├", end="")
     for n in range(size+1):
         print("───┼", end="")
@@ -215,6 +281,10 @@ def new_line(size):
 
 
 def label_line(owner):
+    """
+    For use in the print_boards function, draws a horizontal row
+    of column labels
+    """
     print(" │   │", end="")
     for n in range(owner.board_size):
         print(ANSI.col_txt(
