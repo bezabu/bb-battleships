@@ -85,7 +85,7 @@ class GAME():
             print(f"{allowed - used} ships remaining.")
             while True:
                 new_ship = input("Enter coordinates:")
-                if validate_coord(new_ship, self.board_size, ships):
+                if validate_coord(new_ship, self.board_size, ships, self):
                     ships.append(new_ship)
                     used += 1
                     break
@@ -197,6 +197,10 @@ class GAME():
             line_print += "───┘"
         print(line_print)
         print(ANSI.col_txt(ANSI, 37))
+        if self.board_size == 5:
+            print("\n\n\n", end="")
+        elif self.board_size == 6:
+            print("\n", end="")
 
     def random_assign(self, ship_count):
         """
@@ -237,7 +241,7 @@ def get_board_size():
     return int(size)
 
 
-def validate_coord(coords, size, ships):
+def validate_coord(coords, size, ships, gameself):
     """
     Validate user inputted coordinates to match game formatting
     """
@@ -254,6 +258,7 @@ def validate_coord(coords, size, ships):
             if len(coords) > 2:
                 raise ValueError(f"{coords} is not 1 letter and 1 number")
     except ValueError as e:
+        gameself.print_boards()
         print(f"Invalid data: {e}, please try again.\n")
         return False
     return True
@@ -319,7 +324,7 @@ def guess(owner, player):
         ships = owner.player_guesses
         while True:
             guess = input("Enter coordinates: ")
-            if validate_coord(guess, owner.board_size, ships):
+            if validate_coord(guess, owner.board_size, ships, owner):
                 break
     else:
         ships = owner.computer_guesses
@@ -336,7 +341,7 @@ def guess(owner, player):
         owner.player_guesses.append(guess)
         if guess in owner.computer_ships:
             # hit
-            print("Hit!")
+            message = f"You chose {guess}... Hit!"
             owner.computer_board[number - 1][letter - 1] = "@"
             owner.player_score += 1
             if owner.player_score >= owner.board_size:
@@ -344,38 +349,44 @@ def guess(owner, player):
                 quit()
         else:
             # miss
-            print("Miss!")
+            message = f"You chose {guess}... Miss!"
             owner.computer_board[number - 1][letter - 1] = "X"
     if player is False:
         owner.computer_guesses.append(guess)
-        print(f"Computer chooses {guess}...")
         if guess in owner.player_ships:
             # hit
-            print("Hit!")
+            message = f"Computer chooses {guess}... Hit!"
             owner.computer_score += 1
             if owner.computer_score >= owner.board_size:
                 print(f"Computer won!")
                 quit()
         else:
             # miss
-            print("Miss!")
+            message = f"Computer chooses {guess}... Miss!"
             owner.player_board[number - 1][letter - 1] = "X"
+    return message
 
 
 def main():
+    print("no winner yet")
+    for n in range(8):
+        print("1234567890", end="")
+    print("")
     game = GAME(7)
     game.print_boards()
     # game.random_assign(game.board_size)
     while game.win is False:
         # turn
-        print(game.player_ships)
-        print(game.computer_ships)
+        # print(game.computer_ships)
         print("Your turn! Enter a location as letternumber,", end="")
         print("for example: A1")
-        guess(game, True)
-        print("Computer's turn...", end="")
-        guess(game, False)
+        player_summary = guess(game, True)
+        computer_summary = guess(game, False)
         game.print_boards()
+        print(player_summary, end="")
+        blankspace = ((4 * game.board_size) + 12) - 20
+        print(game.blank * blankspace, end="")
+        print(computer_summary)
     # get input from player
     # validate coords
     # check against computers board
