@@ -33,7 +33,7 @@ class GAME():
         """
         Create game instance and get player info and settings
         """
-        print("                                 Welcome to\n")
+        print("\n                                 Welcome to\n")
         f = open("banner.txt", "r")
         for x in f:
             print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
@@ -70,7 +70,7 @@ class GAME():
         for n in ships:
             letter = ord(n[0]) - 64
             number = int(n[1])
-            board[number - 1][letter - 1] = "@"
+            board[number-1][letter-1] = "@"
 
     def choose_ship(self):
         """
@@ -156,7 +156,7 @@ class GAME():
             for m in range(self.board_size):
                 if str(self.player_board[n][m]) == "@":
                     # if computer has guessed here
-                    b = str(self.board_label[m])+str(n)
+                    b = str(self.board_label[m])+str(n+1)
                     if b in self.computer_guesses:
                         print(ANSI.col_txt(ANSI, 31), end="")
                     else:
@@ -221,7 +221,7 @@ def make_coord(letters, maxnumber):
     Chooses a random coordinate
     """
     cha = random.choice(letters)
-    num = str(round(random.randrange(0, maxnumber)))
+    num = str(round(random.randrange(1, maxnumber+1)))
     return cha + num
 
 
@@ -245,9 +245,9 @@ def validate_coord(coords, size, ships):
         for n in coords:
             letter = ord(coords[0]) - 64
             number = int(coords[1])
-            if letter - 1 < 0 or letter - 1 >= size:
+            if letter < 1 or letter > size:
                 raise ValueError(f"{coords} is not a valid coordinate")
-            if number - 1 < 0 or number - 1 >= size:
+            if number < 1 or number > size:
                 raise ValueError(f"{coords} is not a valid coordinate")
             if coords in ships:
                 raise ValueError(f"{coords} already used")
@@ -368,6 +368,7 @@ def main():
     # game.random_assign(game.board_size)
     while game.win is False:
         # turn
+        print(game.player_ships)
         print(game.computer_ships)
         print("Your turn! Enter a location as letternumber,", end="")
         print("for example: A1")
