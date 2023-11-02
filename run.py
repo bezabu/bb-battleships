@@ -54,7 +54,17 @@ class GAME():
                 break
             elif 'Y' in choose:
                 # assign ship locations function
-                self.player_ships = self.choose_ship()
+                allowed = self.board_size
+                used = 0
+                self.player_ships = []
+                print("Enter ship location as letternumber,")
+                print("for example: A1")
+                for n in range(allowed):
+                    self.print_boards()
+                    print(f"{allowed - used} ships remaining.")
+                    self.player_ships.append(self.choose_ship())
+                    used += 1
+                    self.set_board(self.player_board, self.player_ships)
                 break
             else:
                 print("Please enter Y for yes or N for no.")
@@ -76,23 +86,12 @@ class GAME():
         """
         Allow player to choose ship locations by entering char-int
         """
-        ships = []
-        used = 0
-        allowed = self.board_size
-        print("Enter ship location as letternumber,")
-        print("for example: A1")
-        for n in range(allowed):
-            print(f"{allowed - used} ships remaining.")
-            while True:
-                new_ship = input("Enter coordinates:").upper()
-                if validate_coord(new_ship, self.board_size, ships, self):
-                    ships.append(new_ship)
-                    used += 1
-                    break
-            self.print_boards()
-            print("Your ship locations are: ", end="")
-            print(ships)
-        return ships
+        while True:
+            new_ship = input("Enter coordinates:").upper()
+            if validate_coord(new_ship, self.board_size, self.player_ships, 
+                self):
+                break
+        return new_ship
 
     def validate_name(self, vname):
         """
