@@ -52,11 +52,11 @@ class GAME():
         print("Would you like to choose your ship locations?")
         while True:
             choose = input("Y/N: ").upper()
-            if 'N' in choose:
+            if 'N' in choose and 'Y' not in choose:
                 print("Setting player ships...")
                 self.player_ships = self.random_assign(self.board_size)
                 break
-            elif 'Y' in choose:
+            elif 'Y' in choose and 'N' not in choose:
                 # assign ship locations function
                 allowed = self.board_size
                 used = 0
@@ -162,12 +162,15 @@ class GAME():
             print(ANSI.col_txt(ANSI, 32) + "│", end="")
             for m in range(self.board_size):
                 if str(self.player_board[n][m]) == "@":
-                    # if computer has guessed here
-                    b = str(self.board_label[m])+str(n+1)
-                    if b in self.computer_guesses:
-                        print(ANSI.col_txt(ANSI, 31), end="")
+                    if len(self.player_ships) < self.board_size:
+                        print(ANSI.col_txt(ANSI, 33), end="")
                     else:
-                        print(ANSI.col_txt(ANSI, 37), end="")
+                        # if computer has guessed here
+                        b = str(self.board_label[m])+str(n+1)
+                        if b in self.computer_guesses:
+                            print(ANSI.col_txt(ANSI, 31), end="")
+                        else:
+                            print(ANSI.col_txt(ANSI, 37), end="")
                 elif str(self.player_board[n][m]) == "X":
                     print(ANSI.col_txt(ANSI, 34), end="")
                 print(f" {str(self.player_board[n][m])}", end="")
@@ -375,7 +378,6 @@ def guess(owner, player):
 
 
 def main():
-    print("no winner yet")
     for _ in range(8):
         print("1234567890", end="")
     print("")
@@ -402,12 +404,6 @@ def main():
     # update boards
     # display boards
     # display messages
-    print("no winner yet")
-    for _ in range(8):
-        print("1234567890", end="")
-    print("")
 
 
-# example_ansi = ANSI.background(
-    # ANSI, 97) + ANSI.color_text(ANSI, 96) + "HELLO " + GAME.player_name
 main()
