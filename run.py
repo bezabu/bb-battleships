@@ -38,6 +38,10 @@ class GAME():
         for x in f:
             print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
         f.close()
+        g = open("art.txt", "r")
+        for x in g:
+            print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
+        g.close()
         print(ANSI.col_txt(ANSI, 37) + "\n")
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
@@ -59,7 +63,7 @@ class GAME():
                 self.player_ships = []
                 print("Enter ship location as letternumber,")
                 print("for example: A1")
-                for n in range(allowed):
+                for _ in range(allowed):
                     self.print_boards()
                     print(f"{allowed - used} ships remaining.")
                     self.player_ships.append(self.choose_ship())
@@ -88,8 +92,11 @@ class GAME():
         """
         while True:
             new_ship = input("Enter coordinates:").upper()
-            if validate_coord(new_ship, self.board_size, self.player_ships, 
-                self):
+            if validate_coord(
+                            new_ship,
+                            self.board_size,
+                            self.player_ships,
+                            self):
                 break
         return new_ship
 
@@ -120,7 +127,7 @@ class GAME():
             self.newlist2 = []
             self.player_board.append(self.newlist)
             self.computer_board.append(self.newlist2)
-            for m in range(self.board_size):
+            for _ in range(self.board_size):
                 self.player_board[n].append(" ")
                 self.computer_board[n].append(" ")
 
@@ -246,7 +253,7 @@ def validate_coord(coords, size, ships, gameself):
     Validate user inputted coordinates to match game formatting
     """
     try:
-        for n in coords:
+        for _ in coords:
             letter = ord(coords[0]) - 64
             number = int(coords[1])
             if letter < 1 or letter > size:
@@ -297,7 +304,7 @@ def new_line(size):
     For use in the print_boards function, draws a horizontal line
     """
     print(" ├", end="")
-    for n in range(size+1):
+    for _ in range(size+1):
         print("───┼", end="")
     print("───┤", end="")
 
@@ -369,7 +376,7 @@ def guess(owner, player):
 
 def main():
     print("no winner yet")
-    for n in range(8):
+    for _ in range(8):
         print("1234567890", end="")
     print("")
     game = GAME(7)
@@ -396,7 +403,7 @@ def main():
     # display boards
     # display messages
     print("no winner yet")
-    for n in range(8):
+    for _ in range(8):
         print("1234567890", end="")
     print("")
 
