@@ -48,11 +48,11 @@ class GAME():
         print("Would you like to choose your ship locations?")
         while True:
             choose = input("Y/N: ").upper()
-            if choose.__contains__('N'):
+            if 'N' in choose:
                 print("Setting player ships...")
                 self.player_ships = self.random_assign(self.board_size)
                 break
-            elif choose.__contains__('Y'):
+            elif 'Y' in choose:
                 # assign ship locations function
                 self.player_ships = self.choose_ship()
                 break
@@ -84,11 +84,12 @@ class GAME():
         for n in range(allowed):
             print(f"{allowed - used} ships remaining.")
             while True:
-                new_ship = input("Enter coordinates:")
+                new_ship = input("Enter coordinates:").upper()
                 if validate_coord(new_ship, self.board_size, ships, self):
                     ships.append(new_ship)
                     used += 1
                     break
+            self.print_boards()
             print("Your ship locations are: ", end="")
             print(ships)
         return ships
@@ -323,7 +324,7 @@ def guess(owner, player):
     if player is True:
         ships = owner.player_guesses
         while True:
-            guess = input("Enter coordinates: ")
+            guess = input("Enter coordinates: ").upper()
             if validate_coord(guess, owner.board_size, ships, owner):
                 break
     else:
