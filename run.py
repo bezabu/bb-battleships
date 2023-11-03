@@ -292,7 +292,7 @@ def get_name(owner):
     Prompt the user to enter their name
     """
     while True:
-        name = input('Please enter your name:')
+        name = input('Please enter your name:\n')
         if owner.validate_name(name):
             print(f"\nHello {name}!")
             break
