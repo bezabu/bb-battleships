@@ -1,7 +1,4 @@
 import random
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 
 class ANSI():
@@ -51,7 +48,7 @@ class GAME():
         # print(f"\nHello {GAME.player_name}!\n")
         print("Would you like to choose your ship locations?")
         while True:
-            choose = input("Y/N: ").upper()
+            choose = input("Y/N: \n").upper()
             if 'N' in choose and 'Y' not in choose:
                 print("Setting player ships...")
                 self.player_ships = self.random_assign(self.board_size)
@@ -91,7 +88,7 @@ class GAME():
         Allow player to choose ship locations by entering char-int
         """
         while True:
-            new_ship = input("Enter coordinates:").upper()
+            new_ship = input("Enter coordinates:\n").upper()
             if validate_coord(
                             new_ship,
                             self.board_size,
@@ -244,7 +241,7 @@ def get_board_size():
     Prompt the user to select a board size
     """
     while True:
-        size = input("Please enter a number between 5 and 7: ")
+        size = input("Please enter a number between 5 and 7:\n")
         if validate_size(size):
             print(f"Board size set to {size} x {size}\n")
             break
@@ -333,7 +330,7 @@ def guess(owner, player):
     if player is True:
         ships = owner.player_guesses
         while True:
-            guess = input("Enter coordinates: ").upper()
+            guess = input("Enter coordinates:\n").upper()
             if validate_coord(guess, owner.board_size, ships, owner):
                 break
     else:
