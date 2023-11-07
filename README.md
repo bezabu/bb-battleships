@@ -1,8 +1,14 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+BATTLESHIPS
 
-Welcome,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+![Battleships Command line splash page](https://github.com/bezabu/bb-battleships/assets/images/battleships_splash.webp)
+
+BATTLESHIPS is a digital reimagining of the classic board game. It runs in the Code Institute mock terminal on Heroku.
+
+The goal of the game is to guess the locations of the computer player's ships before it can guess yours. Players take turns guessing locations and those locations are recorded on two grids.
+
+The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.com/)
+
 
 ## Reminders
 
