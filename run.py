@@ -30,7 +30,7 @@ class GAME():
         """
         Create game instance and get player info and settings
         """
-        print("\n                                 Welcome to\n")
+        print("\n                                 Welcome to")
         f = open("banner.txt", "r")
         for x in f:
             print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
@@ -39,7 +39,7 @@ class GAME():
         for x in g:
             print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
         g.close()
-        print(ANSI.col_txt(ANSI, 37) + "\n")
+        print(ANSI.col_txt(ANSI, 37))
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
         self.board_size = get_board_size()
