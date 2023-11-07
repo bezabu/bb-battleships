@@ -349,7 +349,9 @@ def guess(owner, player):
         owner.player_guesses.append(guess)
         if guess in owner.computer_ships:
             # hit
-            message = f"You chose {guess}... Hit!"
+            message = f"{ANSI.col_txt(ANSI, 37)}You chose {guess}..."
+            message += f"{ANSI.col_txt(ANSI, 31)} Hit!"
+            message += f"{ANSI.col_txt(ANSI, 37)}"
             owner.computer_board[number - 1][letter - 1] = "@"
             owner.player_score += 1
             if owner.player_score >= owner.board_size:
@@ -357,20 +359,26 @@ def guess(owner, player):
                 quit()
         else:
             # miss
-            message = f"You chose {guess}... Miss!"
+            message = f"{ANSI.col_txt(ANSI, 37)}You chose {guess}..."
+            message += f"{ANSI.col_txt(ANSI, 34)} Miss!"
+            message += f"{ANSI.col_txt(ANSI, 37)}"
             owner.computer_board[number - 1][letter - 1] = "X"
     if player is False:
         owner.computer_guesses.append(guess)
         if guess in owner.player_ships:
             # hit
-            message = f"Computer chooses {guess}... Hit!"
+            message = f"{ANSI.col_txt(ANSI, 37)}Computer chooses {guess}..."
+            message += f"{ANSI.col_txt(ANSI, 31)} Hit!"
+            message += F"{ANSI.col_txt(ANSI, 37)}"
             owner.computer_score += 1
             if owner.computer_score >= owner.board_size:
                 print(f"Computer won!")
                 quit()
         else:
             # miss
-            message = f"Computer chooses {guess}... Miss!"
+            message = f"{ANSI.col_txt(ANSI, 37)}Computer chooses {guess}..."
+            message += F"{ANSI.col_txt(ANSI, 34)} Miss!"
+            message += F"{ANSI.col_txt(ANSI, 37)}"
             owner.player_board[number - 1][letter - 1] = "X"
     return message
 
