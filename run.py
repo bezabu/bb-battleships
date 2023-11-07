@@ -253,17 +253,18 @@ def validate_coord(coords, size, ships, gameself):
     Validate user inputted coordinates to match game formatting
     """
     try:
-        for _ in coords:
-            letter = ord(coords[0]) - 64
-            number = int(coords[1])
-            if letter < 1 or letter > size:
-                raise ValueError(f"{coords} is not a valid coordinate")
-            if number < 1 or number > size:
-                raise ValueError(f"{coords} is not a valid coordinate")
-            if coords in ships:
-                raise ValueError(f"{coords} already used")
-            if len(coords) > 2:
-                raise ValueError(f"{coords} is not 1 letter and 1 number")
+        if len(coords) == 2:
+            for _ in coords:
+                letter = ord(coords[0]) - 64
+                number = int(coords[1])
+                if letter < 1 or letter > size:
+                    raise ValueError(f"{coords} is not a valid coordinate")
+                if number < 1 or number > size:
+                    raise ValueError(f"{coords} is not a valid coordinate")
+                if coords in ships:
+                    raise ValueError(f"{coords} already used")
+        if len(coords) != 2:
+            raise ValueError(f"{coords} is not 1 letter and 1 number")
     except ValueError as e:
         gameself.print_boards()
         print(f"Invalid data: {e}, please try again.\n")
