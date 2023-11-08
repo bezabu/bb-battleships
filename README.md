@@ -103,130 +103,130 @@ When displaying each player's game boards, for loops are used to print the chara
 - Name
 
   - Test: Enter a name that is longer than 31 characters.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a name 30 characters or shorter.
-  - Result: The input is accepted and the name entered is shown at the gameplay phase.
+    - Result: The input is accepted and the name entered is shown at the gameplay phase.
 
 - Board size
 
   - Test: Enter a string when an integer is expected.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a number smaller than 5 or bigger than 7.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter 5, 6 or 7.
-  - Result: The input is accepted and the correct board size is shown later.
+    - Result: The input is accepted and the correct board size is shown later.
 
 - Ship placement decision
 
   - Test: Enter a number when a string is .
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a string without the letters Y or N.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter "YN".
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter "NY".
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter "Y".
-  - Result: The player is prompted to place their ships.
+    - Result: The player is prompted to place their ships.
 
   - Test: Enter "N".
-  - Result: The player's warships are assigned random locations on the grid and the game begins.
+    - Result: The player's warships are assigned random locations on the grid and the game begins.
 
 - Ship placement
 
   - Test: Enter one letter or number.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter three or more characters.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter two letters.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter two numbers.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a number followed by a letter.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a coordinate with a letter outside of the grid (Z1).
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a coordinate with a number outside of the grid (A9).
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a coordinate that is inside the grid as letter-number.
-  - Result: The coordinate is accepted and a "@" is shown in the correct grid location. The ships remaining message has updated.
+    - Result: The coordinate is accepted and a "@" is shown in the correct grid location. The ships remaining message has updated.
 
   - Test: Enter a coordinate that has already been used.
-  - Result: The appropriate message is displayed and the user is prompted to try again
+    - Result: The appropriate message is displayed and the user is prompted to try again
 
   - Test: Continue entering coordinates for each grid size until the game begins.
-  - Result: The correct number of ships are allocated for each grid size. The "@" shown turns white once the game begins.
+    - Result: The correct number of ships are allocated for each grid size. The "@" shown turns white once the game begins.
 
 - Calling shots
 
   - Test: Enter one letter or number.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter three or more characters.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter two letters.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter two numbers.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a number followed by a letter.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a coordinate with a letter outside of the grid (Z1).
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a coordinate with a number outside of the grid (A9).
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a coordinate that is inside the grid and has not been previously tried.
-  - Result: The grid updates after the computer has played their turn and the message at the bottom of the grid shows the correct location.
+    - Result: The grid updates after the computer has played their turn and the message at the bottom of the grid shows the correct location.
 
   - Test: Enter a coordinate that has been tried already.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Continue entering coordinates until either the user or the computer has hit all warships.
-  - Result: The game ends and the user is asked if they would like to play again.
+    - Result: The game ends and the user is asked if they would like to play again.
 
   - Test: Continue entering coordinates until both the user and the coomputer hit all 5 ships on the same turn.
-  - Result: Registered as a computer win and the player is asked if they would like to play again. Changed code to check if player has already won before declaring victory for computer.
-  - Redo test:
-  - Result: Registered as a player win and the player is asked if they would like to play again.
+    - Result: Registered as a computer win and the player is asked if they would like to play again. Changed code to check if player has already won before declaring victory for computer.
+    - Redo test:
+      - Result: Registered as a player win and the player is asked if they would like to play again.
 
 - Play again decision
 
   - Test: Enter a number when a string is .
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter a string without the letters Y or N.
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter "YN".
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter "NY".
-  - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed and the user is prompted to try again.
 
   - Test: Enter "Y".
-  - Result: The game begins again from the splash 'page'.
+    - Result: The game begins again from the splash 'page'.
 
   - Test: Enter "N".
-  - Result: The program quits.
+    - Result: The program quits.
 
 # Deployment
 
