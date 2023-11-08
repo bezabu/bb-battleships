@@ -40,6 +40,8 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 - The user can enter guesses using the command line. The expected format is given as an example.
 
+- When one player has hit all of the other player's warships, the user is asked if they want to play again.
+
 ### Input validation
 
 - All user inputs can be entered in upper or lower case, the game automatically converts all inputs into upper case as part of the validation.
@@ -62,3 +64,28 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 ![Name Validation](assets/images/name_validation.jpg)
 
 - The name entered at the beginning of the game is limited to a maximum of 30 characters so that it does not result in a new line.
+
+# Technologies
+
+- Python was used as the programming language to make the game.
+- GitHub has been used to store the code, images and other content.
+- Heroku was used to deploy the game to the web.
+- Git was used for version control, pushing contents to github.
+- Codeanywhere was used as IDE.
+- [CI Python Linter](https://pep8ci.herokuapp.com/) was used to test Python code.
+- Paint.NET was used to edit images for the readme.
+- [TinyPNG](https://tinypng.com/) was used to optimise images for the readme
+
+# Testing
+
+# Deployment
+
+# Features to implement
+
+- Seperate name from game
+- more sophisticated coordinate validation
+- ships that span more than one cell
+
+# Credits
+
+Instructions on how to use ANSI escape codes to set the colour of the text were taken from [here](https://www.geeksforgeeks.org/how-to-add-colour-to-text-python/).
