@@ -25,11 +25,17 @@ class GAME():
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     win = False
+    player_name = ""
 
-    def __init__(self, board):
+    def __init__(self):
         """
         Create game instance and get player info and settings
         """
+        self.player_score = 0
+        self.computer_score = 0
+        self.player_guesses = []
+        self.computer_guesses = []
+        self.win = False
         print("\n                                 Welcome to")
         f = open("banner.txt", "r")
         for x in f:
@@ -356,7 +362,7 @@ def guess(owner, player):
             owner.player_score += 1
             if owner.player_score >= owner.board_size:
                 print(f"{owner.player_name} won!")
-                quit()
+                owner.win = True
         else:
             # miss
             message = f"{ANSI.col_txt(ANSI, 37)}You chose {guess}..."
@@ -373,7 +379,7 @@ def guess(owner, player):
             owner.computer_score += 1
             if owner.computer_score >= owner.board_size:
                 print(f"Computer won!")
-                quit()
+                owner.win = True
         else:
             # miss
             message = f"{ANSI.col_txt(ANSI, 37)}Computer chooses {guess}..."
@@ -383,13 +389,7 @@ def guess(owner, player):
     return message
 
 
-def main():
-    for _ in range(8):
-        print("1234567890", end="")
-    print("")
-    game = GAME(7)
-    game.print_boards()
-    # game.random_assign(game.board_size)
+def game_loop(game):
     while game.win is False:
         # turn
         # print(game.computer_ships)
@@ -402,14 +402,23 @@ def main():
         blankspace = ((4 * game.board_size) + 12) - 20
         print(game.blank * blankspace, end="")
         print(computer_summary)
-    # get input from player
-    # validate coords
-    # check against computers board
-    # computer guess
-    # check against player board
-    # update boards
-    # display boards
-    # display messages
+    play_again()
+
+
+def play_again():
+    again = input("Would you like to play again? Y/N:\n").upper()
+    if 'Y' in again and 'N' not in again:
+        main()
+    elif 'N' in again and 'Y' not in again:
+        print("Thanks for playing!")
+        quit()
+
+
+def main():
+    print("")
+    game = GAME()
+    game.print_boards()
+    game_loop(game)
 
 
 main()
