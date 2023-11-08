@@ -376,7 +376,7 @@ def guess(owner, player):
             message += f"{ANSI.col_txt(ANSI, 31)} Hit!"
             message += F"{ANSI.col_txt(ANSI, 37)}"
             owner.computer_score += 1
-            if owner.computer_score >= owner.board_size:
+            if owner.computer_score >= owner.board_size and owner.win is False:
                 owner.winner = f"Computer won!"
                 owner.win = True
         else:
@@ -405,6 +405,7 @@ def game_loop(game):
         blankspace = ((4 * game.board_size) + 12) - 20
         print(game.blank * blankspace, end="")
         print(computer_summary)
+        print(game.computer_ships)
     print(game.winner)
     play_again()
 
