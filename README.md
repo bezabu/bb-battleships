@@ -250,4 +250,8 @@ The following steps were taken to deploy:
 
 # Credits
 
+The mock terminal used to host the game has been created by Code institute.
+
 Instructions on how to use ANSI escape codes to set the colour of the text were taken from [here](https://www.geeksforgeeks.org/how-to-add-colour-to-text-python/).
+
+The Battleship Board game is believed to have originated in WW1 and was popularised by various companies in the 20th century, notably Starex, Milton Bradley Corporation and Hasbro.
