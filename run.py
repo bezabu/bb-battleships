@@ -25,6 +25,7 @@ class GAME():
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     win = False
+    winner = ""
     player_name = ""
 
     def __init__(self):
@@ -361,7 +362,7 @@ def guess(owner, player):
             owner.computer_board[number - 1][letter - 1] = "@"
             owner.player_score += 1
             if owner.player_score >= owner.board_size:
-                print(f"{owner.player_name} won!")
+                owner.winner = f"{owner.player_name} won!"
                 owner.win = True
         else:
             # miss
@@ -378,7 +379,7 @@ def guess(owner, player):
             message += F"{ANSI.col_txt(ANSI, 37)}"
             owner.computer_score += 1
             if owner.computer_score >= owner.board_size:
-                print(f"Computer won!")
+                owner.winner = f"Computer won!"
                 owner.win = True
         else:
             # miss
@@ -402,16 +403,22 @@ def game_loop(game):
         blankspace = ((4 * game.board_size) + 12) - 20
         print(game.blank * blankspace, end="")
         print(computer_summary)
+    print(game.winner)
     play_again()
 
 
 def play_again():
-    again = input("Would you like to play again? Y/N:\n").upper()
-    if 'Y' in again and 'N' not in again:
-        main()
-    elif 'N' in again and 'Y' not in again:
-        print("Thanks for playing!")
-        quit()
+    while True:
+        again = input("Would you like to play again? Y/N:\n").upper()
+        if 'Y' in again and 'N' not in again:
+            main()
+            break
+        elif 'N' in again and 'Y' not in again:
+            print("Thanks for playing!")
+            quit()
+        else:
+            print("Please enter Y for yes or N for no.")
+            False
 
 
 def main():
