@@ -115,7 +115,6 @@ class GAME():
                     f"Name is {len(name)} characters,\nmust be less than 30"
                 )
         except ValueError as e:
-            self.print_boards()
             print(f"Invalid data: {e}. Please try again.\n")
             return False
         return True
