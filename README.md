@@ -100,6 +100,19 @@ When displaying each player's game boards, for loops are used to print the chara
 
 # Testing
 
+- Name
+  - Test: Enter a name that is longer than 31 characters
+  - Result: The appropriate message is displayed and the user is prompted to try again
+
+- Board size
+  - Test: Enter a string when an integer is expected
+  - Result: The appropriate message is displayed and the user is prompted to try again
+
+  - Test: Enter a number smaller than 5 or bigger than 7
+  - Result: The appropriate message is displayed and the user is prompted to try again
+
+- 
+
 # Deployment
 
 The following steps were taken to deploy:

@@ -284,10 +284,10 @@ def validate_size(vsize):
         size = int(vsize)
         if size < 5 or size > 7:
             raise ValueError(
-                f"Board size must be between 5 and 7, you entered {size}"
+                f"Size must be either 5, 6 or 7. You entered {size}"
             )
     except ValueError as e:
-        print(f"Invalid data: {e}. Please try again.\n")
+        print(f"Invalid data: {e}. \nPlease try again.\n")
         return False
     return True
 
