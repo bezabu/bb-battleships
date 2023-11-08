@@ -80,6 +80,18 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 # Deployment
 
+The following steps were taken to deploy:
+- Go to [Heroku](https://heroku.com/), click 'New', 'create new app'
+- Set the App name, choose Europe as region
+- In Settings, set a new config var with a key of PORT and a value of 8000
+- In Settings, add buildpacks Python and NodeJS in that order
+- In Deploy, set deployment method to GitHub
+- Connect to GitHub and search for the correct repository
+- Ensure deploment is from main branch
+- Enable Automatic Deploys
+- Click Deploy Branch
+- The deployed app can be found [here](https://bb-battleships-f22f01c35958.herokuapp.com/)
+
 # Features to implement
 
 - Seperate name from game
