@@ -19,8 +19,13 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 ## Features
 
+![Starting inputs; name, board size](assets/images/starting_parameters.webp)
+
 - A splash 'page' welcomes the player and prompts them to enter their name
 - The user can choose between 3 sizes of game grid; 5x5, 6x6 or 7x7
+
+![Ship placement](assets/images/ship_placement.webp)
+
 - The user can choose to place their ships themselves by entering coordinates or opt to place them randomly. Ships are displayed in yellow to differentiate between the setup phase and the guessing phase.
 - A grid is displayed in text showing the player's ships and all previous computer guesses. If the player's ships have been hit, they are displayed in red. Missed shots are shown in blue.
 - A second grid is shown with the same information minus the location of the computer player's ships, which only appear once they have been hit.
