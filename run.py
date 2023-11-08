@@ -136,13 +136,12 @@ class GAME():
 
     def print_boards(self):
         """
-        Display the game boards
+        Display the game boards by iterating over several lines
         """
         blankspace = (((self.board_size*4)+9)*2)-24
         print(f" {self.player_name}'s board" + self.blank * (
             blankspace - len(self.player_name)) + "Computer's board")
         # top row
-        # line_print = ""
         for n in range(2):
             line_print = " ┌"
             for m in range(self.board_size+1):
@@ -229,7 +228,6 @@ class GAME():
                 if new_coord not in ship_list:
                     ship_list.append(new_coord)
                     break
-        # print(ship_list)
         return ship_list
 
 
@@ -296,7 +294,7 @@ def validate_size(vsize):
 
 def get_name(owner):
     """
-    Prompt the user to enter their name
+    Prompt the user to enter their name, validate and return the name
     """
     while True:
         name = input('Please enter your name:\n')
@@ -308,7 +306,7 @@ def get_name(owner):
 
 def new_line(size):
     """
-    For use in the print_boards function, draws a horizontal line
+    For use in the print_boards function, draws an interior horizontal line
     """
     print(" ├", end="")
     for _ in range(size+1):
@@ -331,7 +329,8 @@ def label_line(owner):
 
 def guess(owner, player):
     """
-    Get input from the player, validate and compare to computer's ships
+    Get input from the player, validate and compare to computer's ships.
+    Returns the message to display under the game boards
     """
     guess = ""
     if player is True:
@@ -390,6 +389,10 @@ def guess(owner, player):
 
 
 def game_loop(game):
+    """
+    Alternates between user and computer guesses until there is a winner,
+    then calls the play_again function
+    """
     while game.win is False:
         # turn
         # print(game.computer_ships)
@@ -407,6 +410,11 @@ def game_loop(game):
 
 
 def play_again():
+    """
+    Asks the user if they want to play again.
+    If yes, creates a new game instance.
+    If no, exit the program.
+    """
     while True:
         again = input("Would you like to play again? Y/N:\n").upper()
         if 'Y' in again and 'N' not in again:
@@ -421,6 +429,9 @@ def play_again():
 
 
 def main():
+    """
+    Create a new game instance and start the game_loop function
+    """
     print("")
     game = GAME()
     game.print_boards()

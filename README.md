@@ -65,9 +65,31 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 - The name entered at the beginning of the game is limited to a maximum of 30 characters so that it does not result in a new line.
 
+### Data Model
+
+The GAME class stores information like board size, player guesses and warship locations.
+
+Warship locations are stored as grid references. These are strings 2 characters long; the first character is an upper case letter, the second character is a number ( A1, B2 etc)
+
+Previous guesses and warship locations are stored as lists of grid references in the GAME class. When validating guesses, the input is compared to these lists.
+
+["A1", "B2"]
+
+When randomly generating locations or checking if inputs are within the bounds of the game, each character is converted to an integer to compare against the grid.
+
+Characters to display on the game boards are stored in arrays, which are updated when guesses are made.
+The x and y values are compared to the appropriate list to determine what character to display ("@", "X" or " ").
+
+When displaying each player's game boards, for loops are used to print the characters ─, │, ┌, ┐, └, ┘, ├, ┤, ┬, ┴ and ┼ to draw a grid over several lines. During iteration:
+- the board label list is used to provide values for the horizontal axis labels.
+- the appropriate array is checked to determine the character to display and what colour it should be.
+
+
+
 # Technologies
 
 - Python was used as the programming language to make the game.
+- The [Random](https://docs.python.org/3/library/random.html#random.Random) Python module has been used to provide randomly generated numbers
 - GitHub has been used to store the code, images and other content.
 - Heroku was used to deploy the game to the web.
 - Git was used for version control, pushing contents to github.
