@@ -49,10 +49,7 @@ class GAME():
         for x in f:
             print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
         f.close()
-        g = open("art.txt", "r")
-        for x in g:
-            print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
-        g.close()
+        self.draw_art()
         print(ANSI.col_txt(ANSI, 37))
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
@@ -94,6 +91,12 @@ class GAME():
             number = int(n[1])
             board[number-1][letter-1] = "@"
 
+    def draw_art(self):
+        g = open("art.txt", "r")
+        for x in g:
+            print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
+        g.close()
+    
     def choose_ship(self):
         """
         Allow player to choose ship locations by entering char-int.
@@ -307,6 +310,7 @@ def get_name(owner):
     while True:
         name = input('Please enter your name:\n')
         if owner.validate_name(name):
+            owner.draw_art()
             print(f"\nHello {name}!")
             break
     return name
