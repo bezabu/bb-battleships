@@ -13,15 +13,11 @@ class ANSI():
 
 
 class GAME():
-    # player_name = ""
     blank = " "
-    # board_size = 7
     player_score = 0
     computer_score = 0
     player_guesses = []
     computer_guesses = []
-    # player_ships = []
-    # computer_ships = []
     board_label = [
         "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
     win = False
@@ -51,8 +47,6 @@ class GAME():
         print("Please set the size of the game board.")
         self.board_size = get_board_size()
         self.make_boards()
-        # GAME.player_name = input('Enter your name:')
-        # print(f"\nHello {GAME.player_name}!\n")
         print("Would you like to choose your ship locations?")
         while True:
             choose = input("Y/N: \n").upper()
@@ -61,7 +55,6 @@ class GAME():
                 self.player_ships = self.random_assign(self.board_size)
                 break
             elif 'Y' in choose and 'N' not in choose:
-                # assign ship locations function
                 allowed = self.board_size
                 used = 0
                 self.player_ships = []
@@ -394,8 +387,6 @@ def game_loop(game):
     then calls the play_again function
     """
     while game.win is False:
-        # turn
-        # print(game.computer_ships)
         print("Your turn! Enter a location as letternumber,", end="")
         print("for example: A1")
         player_summary = guess(game, True)
@@ -405,7 +396,6 @@ def game_loop(game):
         blankspace = ((4 * game.board_size) + 12) - 20
         print(game.blank * blankspace, end="")
         print(computer_summary)
-        print(game.computer_ships)
     print(game.winner)
     play_again()
 
