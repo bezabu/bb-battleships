@@ -72,7 +72,7 @@ class GAME():
                 print("for example: A1")
                 for _ in range(allowed):
                     self.print_boards()
-                    print(f"{allowed - used} ships remaining.")
+                    print(f"{allowed - used} ships remaining.\n")
                     self.player_ships.append(self.choose_ship())
                     used += 1
                     self.set_board(self.player_board, self.player_ships)
