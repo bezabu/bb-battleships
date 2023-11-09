@@ -43,7 +43,7 @@ class GAME():
         self.player_guesses = []
         self.computer_guesses = []
         self.win = False
-        print(ANSI.col_bck(ANSI, 40), end="")
+        print(ANSI.col_bck(ANSI, 0), end="")
         print("\n                                 Welcome to")
         f = open("banner.txt", "r")
         for x in f:
@@ -54,7 +54,6 @@ class GAME():
             print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
         g.close()
         print(ANSI.col_txt(ANSI, 37))
-        print(ANSI.col_bck(ANSI, 97), end="")
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
         self.board_size = get_board_size()
@@ -149,7 +148,7 @@ class GAME():
         print(f" {self.player_name}'s board" + self.blank * (
             blankspace - len(self.player_name)) + "Computer's board ", end="")
         print(ANSI.col_txt(ANSI, 37), end="")
-        print(ANSI.col_bck(ANSI, 97))
+        print(ANSI.col_bck(ANSI, 0))
         # top row
         for n in range(2):
             line_print = " ┌"
