@@ -96,7 +96,7 @@ class GAME():
         for x in g:
             print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
         g.close()
-    
+  
     def choose_ship(self):
         """
         Allow player to choose ship locations by entering char-int.
@@ -311,7 +311,11 @@ def get_name(owner):
         name = input('Please enter your name:\n')
         if owner.validate_name(name):
             owner.draw_art()
+            for _ in range(2):
+                print("")
             print(f"\nHello {name}!")
+            for _ in range(2):
+                print("")
             break
     return name
 
