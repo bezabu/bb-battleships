@@ -397,6 +397,7 @@ def game_loop(game):
     Alternates between user and computer guesses until there is a winner,
     then calls the play_again function.
     """
+    print(" ")
     while game.win is False:
         print("Your turn! Enter a location as letternumber,", end="")
         print("for example: A1")
