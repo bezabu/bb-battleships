@@ -49,7 +49,7 @@ class GAME():
         for x in f:
             print(ANSI.col_txt(ANSI, 31) + x.replace('\n', ' '))
         f.close()
-        self.draw_art()
+        draw_art()
         print(ANSI.col_txt(ANSI, 37))
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
@@ -91,12 +91,6 @@ class GAME():
             number = int(n[1])
             board[number-1][letter-1] = "@"
 
-    def draw_art(self):
-        g = open("art.txt", "r")
-        for x in g:
-            print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
-        g.close()
-  
     def choose_ship(self):
         """
         Allow player to choose ship locations by entering char-int.
@@ -242,6 +236,13 @@ class GAME():
         return ship_list
 
 
+def draw_art():
+    g = open("art.txt", "r")
+    for x in g:
+        print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
+    g.close()
+
+
 def make_coord(letters, maxnumber):
     """
     Chooses a random coordinate.
@@ -310,12 +311,8 @@ def get_name(owner):
     while True:
         name = input('Please enter your name:\n')
         if owner.validate_name(name):
-            owner.draw_art()
-            for _ in range(2):
-                print("")
             print(f"\nHello {name}!")
-            for _ in range(2):
-                print("")
+            blank_lines(2)
             break
     return name
 
@@ -341,6 +338,11 @@ def label_line(owner):
             ANSI, 37) + f" {str(owner.board_label[n])} ", end="")
         print(ANSI.col_txt(ANSI, 32) + "│", end="")
     print("   │", end="")
+
+
+def blank_lines(num):
+    for _ in range(num):
+        print("")
 
 
 def guess(owner, player):
@@ -437,6 +439,9 @@ def play_again():
             main()
             break
         elif 'N' in again and 'Y' not in again:
+            blank_lines(2)
+            draw_art()
+            blank_lines(3)
             print("Thanks for playing!")
             quit()
         else:
