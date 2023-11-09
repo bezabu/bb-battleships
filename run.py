@@ -149,7 +149,7 @@ class GAME():
         print(f" {self.player_name}'s board" + self.blank * (
             blankspace - len(self.player_name)) + "Computer's board ", end="")
         print(ANSI.col_txt(ANSI, 37), end="")
-        print(ANSI.col_bck(ANSI, 40))
+        print(ANSI.col_bck(ANSI, 97))
         # top row
         for n in range(2):
             line_print = " ┌"
