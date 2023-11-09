@@ -216,7 +216,7 @@ class GAME():
                 line_print += "───┴"
             line_print += "───┘"
         print(line_print)
-        print(ANSI.col_txt(ANSI, 37))
+        print(ANSI.col_txt(ANSI, 37), end="")
         if self.board_size == 5:
             print("\n\n\n", end="")
         elif self.board_size == 6:
