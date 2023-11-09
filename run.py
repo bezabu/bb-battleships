@@ -2,17 +2,27 @@ import random
 
 
 class ANSI():
+    """
+    Refactored escape codes. Enables supplying just the colour
+    code and the functions will return the entire escape codes.
+    """
     def background(self, code):
-        return "\33[{code}m".format(code=code)
-
-    def sty_txt(self, code):
+        """
+        Returns ANSI escape code for background colouring.
+        """
         return "\33[{code}m".format(code=code)
 
     def col_txt(self, code):
+        """
+        Returns ANSI escape code for text colouring.
+        """
         return "\33[{code}m".format(code=code)
 
 
 class GAME():
+    """
+    Class holding relevant game information and functions.
+    """
     blank = " "
     player_score = 0
     computer_score = 0
@@ -26,7 +36,7 @@ class GAME():
 
     def __init__(self):
         """
-        Create game instance and get player info and settings
+        Create game instance and get player info and settings.
         """
         self.player_score = 0
         self.computer_score = 0
@@ -76,7 +86,7 @@ class GAME():
 
     def set_board(self, board, ships):
         """
-        Update the board with the ship positions
+        Update the board with the ship positions.
         """
         for n in ships:
             letter = ord(n[0]) - 64
@@ -85,7 +95,7 @@ class GAME():
 
     def choose_ship(self):
         """
-        Allow player to choose ship locations by entering char-int
+        Allow player to choose ship locations by entering char-int.
         """
         while True:
             new_ship = input("Enter coordinates:\n").upper()
@@ -99,7 +109,7 @@ class GAME():
 
     def validate_name(self, vname):
         """
-        Check if name entered is less than 30 characters long
+        Check if name entered is less than 30 characters long.
         """
         try:
             name = str(vname)
@@ -114,7 +124,7 @@ class GAME():
 
     def make_boards(self):
         """
-        Create the 2 dimensional arrays to store board info
+        Create the 2 dimensional arrays to store board info.
         """
         self.player_board = []
         self.computer_board = []
@@ -129,7 +139,7 @@ class GAME():
 
     def print_boards(self):
         """
-        Display the game boards by iterating over several lines
+        Display the game boards by iterating over several lines.
         """
         blankspace = (((self.board_size*4)+9)*2)-24
         print(f" {self.player_name}'s board" + self.blank * (
@@ -209,7 +219,7 @@ class GAME():
 
     def random_assign(self, ship_count):
         """
-        Returns a list of randomly selected positions
+        Returns a list of randomly selected positions.
         """
         ship_list = []
         letter_list = []
@@ -226,7 +236,7 @@ class GAME():
 
 def make_coord(letters, maxnumber):
     """
-    Chooses a random coordinate
+    Chooses a random coordinate.
     """
     cha = random.choice(letters)
     num = str(round(random.randrange(1, maxnumber+1)))
@@ -235,7 +245,7 @@ def make_coord(letters, maxnumber):
 
 def get_board_size():
     """
-    Prompt the user to select a board size
+    Prompt the user to select a board size.
     """
     while True:
         size = input("Please enter a number between 5 and 7:\n")
@@ -247,7 +257,7 @@ def get_board_size():
 
 def validate_coord(coords, size, ships, gameself):
     """
-    Validate user inputted coordinates to match game formatting
+    Validate user inputted coordinates to match game formatting.
     """
     try:
         if len(coords) == 2:
@@ -271,7 +281,7 @@ def validate_coord(coords, size, ships, gameself):
 
 def validate_size(vsize):
     """
-    Ensure the board size in an integer between 5 and 7
+    Ensure the board size in an integer between 5 and 7.
     """
     try:
         size = int(vsize)
@@ -287,7 +297,7 @@ def validate_size(vsize):
 
 def get_name(owner):
     """
-    Prompt the user to enter their name, validate and return the name
+    Prompt the user to enter their name, validate and return the name.
     """
     while True:
         name = input('Please enter your name:\n')
@@ -299,7 +309,7 @@ def get_name(owner):
 
 def new_line(size):
     """
-    For use in the print_boards function, draws an interior horizontal line
+    For use in the print_boards function, draws an interior horizontal line.
     """
     print(" ├", end="")
     for _ in range(size+1):
@@ -309,8 +319,8 @@ def new_line(size):
 
 def label_line(owner):
     """
-    For use in the print_boards function, draws a horizontal row
-    of column labels
+    For use in the print_boards function, draws a row
+    of column labels.
     """
     print(" │   │", end="")
     for n in range(owner.board_size):
@@ -323,7 +333,8 @@ def label_line(owner):
 def guess(owner, player):
     """
     Get input from the player, validate and compare to computer's ships.
-    Returns the message to display under the game boards
+    Updates the relevant lists and returns the message to display under
+    the game boards.
     """
     guess = ""
     if player is True:
@@ -384,7 +395,7 @@ def guess(owner, player):
 def game_loop(game):
     """
     Alternates between user and computer guesses until there is a winner,
-    then calls the play_again function
+    then calls the play_again function.
     """
     while game.win is False:
         print("Your turn! Enter a location as letternumber,", end="")
@@ -421,7 +432,7 @@ def play_again():
 
 def main():
     """
-    Create a new game instance and start the game_loop function
+    Create a new game instance and start the game_loop function.
     """
     print("")
     game = GAME()
