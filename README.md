@@ -13,15 +13,15 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 ## How to Play
 
 
-- Each player first chooses the locations of their warships, and then take turns calling shots
-- During the player's turn, they are prompted to enter a grid coordinate to guess. If the coordinate chosen contains an enemy warship, a hit is recorded on the grid and the warship is destroyed. If the grid coordinate contains no enemy warship then a miss is recorded as a blue x.
-- The game ends when one player has eliminated all of their oponent's warships
+- Each player first chooses the locations of their warships, and then takes turns calling shots
+- During the player's turn, they are prompted to enter a grid coordinate to guess. If an enemy warship is present at the coordinates, a hit is recorded on the grid and the warship is destroyed. If the grid coordinate contains no enemy warships then a miss is recorded as a blue x.
+- The game ends when one player has eliminated all of their opponent's warships
 
 ## Features
 
 ![Starting inputs; name, board size](assets/images/starting_parameters.jpg)
 
-- A splash 'page' welcomes the player and prompts them to enter their name
+- A splash 'page' welcomes the player and prompts them to enter their name.
 - The user can choose between 3 sizes of game grid; 5x5, 6x6 or 7x7
 
 ![Ship placement](assets/images/ship_placement.jpg)
@@ -36,11 +36,11 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 - Underneath the grid, the results of both player's previous guesses are shown. Hits are shown in red, misses in blue.
 
-- Any error messages include the grids so that in the event of an invalid input, the previous guesses text is replaced by the error message.
+- Any error messages include the grids so that in the event of an invalid input, the previous guess text is replaced by the error message.
 
 - The user can enter guesses using the command line. The expected format is given as an example.
 
-- When one player has hit all of the other player's warships, the user is asked if they want to play again.
+- When one player has hit all the other player's warships, the user is asked if they want to play again.
 
 ### Input validation
 
@@ -48,7 +48,7 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 ![Yes/No](assets/images/yes_no_input.jpg)
 
-- Yes/No inputs such as the choice of random ship placement or to play again are tested so that only an input containing Y but not N will count as a yes input and vice versa. If the user inputs neither Y or N then they will be prompted to try again.
+- Yes/No inputs such as the choice of random ship placement or to play again are tested so that only an input containing Y but not N will count as a yes input and vice versa. If the user inputs neither Y nor N then they will be prompted to try again.
 
 ![Invalid coordinates entered](assets/images/error_coords.jpg)
 
@@ -57,7 +57,7 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
   - Inputs that are number-letter (1A, 2B etc) are rejected
   - Inputs that are number-number (11, 22 etc) are rejected
   - Inputs that are letter-letter (AA, BB etc) are rejected
-  - Inputs that are outside of the grid size (A0, B9 etc) are rejected
+  - Inputs that are outside the grid (A0, B9 etc) are rejected
   - Inputs that have already been successfully entered(previous guesses or already placed ships) are rejected
 - All rejected inputs are handled through an except block which also prints the grid. As this all takes place in a while loop it prevents lines building up underneath the grid, pushing it out of view
 
@@ -69,7 +69,7 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 The GAME class stores information like board size, player guesses and warship locations.
 
-Warship locations are stored as grid references. These are strings 2 characters long; the first character is an upper case letter, the second character is a number ( A1, B2 etc)
+Warship locations are stored as grid references. These are strings 2 characters long; the first character is an upper case letter, the second character is a number (A1, B2 etc)
 
 Previous guesses and warship locations are stored as lists of grid references in the GAME class. When validating guesses, the input is compared to these lists.
 
@@ -81,40 +81,40 @@ Characters to display on the game boards are stored in arrays, which are updated
 The x and y values are compared to the appropriate list to determine what character to display ("@", "X" or " ").
 
 When displaying each player's game boards, for loops are used to print the characters ─, │, ┌, ┐, └, ┘, ├, ┤, ┬, ┴ and ┼ to draw a grid over several lines. During iteration:
-- the board label list is used to provide values for the horizontal axis labels.
-- the appropriate array is checked to determine the character to display and what colour it should be.
+- The board label list is used to provide values for the horizontal axis labels.
+- The appropriate array is checked to determine the character to display and what colour it should be.
 
 
 
 # Technologies
 
 - Python was used as the programming language to make the game.
-- The [Random](https://docs.python.org/3/library/random.html#random.Random) Python module has been used to provide randomly generated numbers
-- GitHub has been used to store the code, images and other content.
+- The [Random](https://docs.python.org/3/library/random.html#random.Random) Python module has been used to provide randomly generated .
+- GitHub has been used to store code, images and other content.
 - Heroku was used to deploy the game to the web.
-- Git was used for version control, pushing contents to github.
-- Codeanywhere was used as IDE.
+- Git was used for version control, pushing contents to GitHub.
+- Codeanywhere was used as an IDE.
 - [CI Python Linter](https://pep8ci.herokuapp.com/) was used to test Python code.
 - Paint.NET was used to edit images for the readme.
-- [TinyPNG](https://tinypng.com/) was used to optimise images for the readme
+- [TinyPNG](https://tinypng.com/) was used to optimise images for the readme.
 
 # Testing
 
 - Name
 
   - Test: Enter a name that is longer than 31 characters.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a name 30 characters or shorter.
-    - Result: The input is accepted and the name entered is shown at the gameplay phase.
+    - Result: The input is accepted and the name entered is shown in the gameplay phase.
 
 - Board size
 
   - Test: Enter a string when an integer is expected.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a number smaller than 5 or bigger than 7.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter 5, 6 or 7.
     - Result: The input is accepted and the correct board size is shown later.
@@ -122,16 +122,16 @@ When displaying each player's game boards, for loops are used to print the chara
 - Ship placement decision
 
   - Test: Enter a number when a string is .
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a string without the letters Y or N.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter "YN".
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter "NY".
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter "Y".
     - Result: The player is prompted to place their ships.
@@ -142,31 +142,31 @@ When displaying each player's game boards, for loops are used to print the chara
 - Ship placement
 
   - Test: Enter one letter or number.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter three or more characters.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter two letters.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter two numbers.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a number followed by a letter.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
-  - Test: Enter a coordinate with a letter outside of the grid (Z1).
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+  - Test: Enter a coordinate with a letter outside the grid (Z1).
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
-  - Test: Enter a coordinate with a number outside of the grid (A9).
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+  - Test: Enter a coordinate with a number outside the grid (A9).
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a coordinate that is inside the grid as letter-number.
-    - Result: The coordinate is accepted and a "@" is shown in the correct grid location. The ships remaining message has updated.
+    - Result: The coordinate is accepted and a "@" is shown in the correct grid location. The ships remaining message has been updated.
 
   - Test: Enter a coordinate that has already been used.
-    - Result: The appropriate message is displayed and the user is prompted to try again
+    - Result: The appropriate message is displayed, and the user is prompted to try again
 
   - Test: Continue entering coordinates for each grid size until the game begins.
     - Result: The correct number of ships are allocated for each grid size. The "@" shown turns white once the game begins.
@@ -174,53 +174,53 @@ When displaying each player's game boards, for loops are used to print the chara
 - Calling shots
 
   - Test: Enter one letter or number.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter three or more characters.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter two letters.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter two numbers.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a number followed by a letter.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
-  - Test: Enter a coordinate with a letter outside of the grid (Z1).
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+  - Test: Enter a coordinate with a letter outside the grid (Z1).
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
-  - Test: Enter a coordinate with a number outside of the grid (A9).
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+  - Test: Enter a coordinate with a number outside the grid (A9).
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a coordinate that is inside the grid and has not been previously tried.
     - Result: The grid updates after the computer has played their turn and the message at the bottom of the grid shows the correct location.
 
   - Test: Enter a coordinate that has been tried already.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Continue entering coordinates until either the user or the computer has hit all warships.
-    - Result: The game ends and the user is asked if they would like to play again.
+    - Result: The game ends, and the user is asked if they would like to play again.
 
-  - Test: Continue entering coordinates until both the user and the coomputer hit all 5 ships on the same turn.
-    - Result: Registered as a computer win and the player is asked if they would like to play again. Changed code to check if player has already won before declaring victory for computer.
+  - Test: Continue entering coordinates until both the user and the computer hit all 5 ships on the same turn.
+    - Result: Registered as a computer win and the player is asked if they would like to play again. Changed code to check if the player has already won before declaring victory for the computer.
     - Redo test:
       - Result: Registered as a player win and the player is asked if they would like to play again.
 
 - Play again decision
 
   - Test: Enter a number when a string is .
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a string without the letters Y or N.
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter "YN".
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter "NY".
-    - Result: The appropriate message is displayed and the user is prompted to try again.
+    - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter "Y".
     - Result: The game begins again from the splash 'page'.
@@ -231,22 +231,20 @@ When displaying each player's game boards, for loops are used to print the chara
 # Deployment
 
 The following steps were taken to deploy:
-- Go to [Heroku](https://heroku.com/), click 'New', 'create new app'
-- Set the App name, choose Europe as region
-- In Settings, set a new config var with a key of PORT and a value of 8000
-- In Settings, add buildpacks Python and NodeJS in that order
-- In Deploy, set deployment method to GitHub
-- Connect to GitHub and search for the correct repository
-- Ensure deploment is from main branch
-- Enable Automatic Deploys
-- Click Deploy Branch
-- The deployed app can be found [here](https://bb-battleships-f22f01c35958.herokuapp.com/)
+- Go to [Heroku](https://heroku.com/), click 'New', 'create new app'.
+- Set the App name. Choose Europe as region.
+- In Settings, set a new config var with a key of PORT and a value of 8000.
+- In Settings, add buildpacks Python and NodeJS in that order.
+- In Deploy, set deployment method to GitHub.
+- Connect to GitHub and search for the correct repository.
+- Ensure the deploment is from main branch.
+- Enable Automatic Deploys.
+- Click Deploy Branch.
+- The deployed app can be found [here](https://bb-battleships-f22f01c35958.herokuapp.com/).
 
 # Features to implement
 
-- Seperate name from game
-- more sophisticated coordinate validation
-- ships that span more than one cell
+- Ships that span more than one cell, and for the computer player to guess around a hit.
 
 # Credits
 
