@@ -341,6 +341,9 @@ def label_line(owner):
 
 
 def blank_lines(num):
+    """
+    Prints empty strings to force a new line
+    """
     for _ in range(num):
         print("")
 
@@ -441,7 +444,7 @@ def play_again():
         elif 'N' in again and 'Y' not in again:
             blank_lines(2)
             draw_art()
-            blank_lines(3)
+            blank_lines(5)
             print("Thanks for playing!")
             quit()
         else:
