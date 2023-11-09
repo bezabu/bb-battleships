@@ -6,7 +6,7 @@ class ANSI():
     Refactored escape codes. Enables supplying just the colour
     code and the functions will return the entire escape codes.
     """
-    def background(self, code):
+    def col_bck(self, code):
         """
         Returns ANSI escape code for background colouring.
         """
@@ -43,6 +43,7 @@ class GAME():
         self.player_guesses = []
         self.computer_guesses = []
         self.win = False
+        print(ANSI.col_bck(ANSI, 40), end="")
         print("\n                                 Welcome to")
         f = open("banner.txt", "r")
         for x in f:
@@ -53,6 +54,7 @@ class GAME():
             print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
         g.close()
         print(ANSI.col_txt(ANSI, 37))
+        print(ANSI.col_bck(ANSI, 97), end="")
         self.player_name = get_name(self)
         print("Please set the size of the game board.")
         self.board_size = get_board_size()
@@ -141,9 +143,13 @@ class GAME():
         """
         Display the game boards by iterating over several lines.
         """
+        print(ANSI.col_bck(ANSI, 47), end="")
+        print(ANSI.col_txt(ANSI, 30), end="")
         blankspace = (((self.board_size*4)+9)*2)-24
         print(f" {self.player_name}'s board" + self.blank * (
-            blankspace - len(self.player_name)) + "Computer's board")
+            blankspace - len(self.player_name)) + "Computer's board ", end="")
+        print(ANSI.col_txt(ANSI, 37), end="")
+        print(ANSI.col_bck(ANSI, 40))
         # top row
         for n in range(2):
             line_print = " ┌"
