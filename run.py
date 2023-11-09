@@ -237,6 +237,9 @@ class GAME():
 
 
 def draw_art():
+    """
+    Draw ASCII art of ship from txt file.
+    """
     g = open("art.txt", "r")
     for x in g:
         print(ANSI.col_txt(ANSI, 37) + x.replace('\n', ' '))
