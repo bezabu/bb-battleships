@@ -215,9 +215,9 @@ class GAME():
         print(line_print)
         print(ANSI.col_txt(ANSI, 37), end="")
         if self.board_size == 5:
-            print("\n\n\n", end="")
+            print("\n\n\n\n", end="")
         elif self.board_size == 6:
-            print("\n", end="")
+            print("\n\n", end="")
 
     def random_assign(self, ship_count):
         """
