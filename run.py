@@ -94,6 +94,7 @@ class GAME():
     def choose_ship(self):
         """
         Allow player to choose ship locations by entering char-int.
+        Returns new ship location.
         """
         while True:
             new_ship = input("Enter coordinates:\n").upper()
@@ -149,7 +150,6 @@ class GAME():
             blankspace - len(self.player_name)) + "Computer's board "
         buffer += ANSI.col_txt(ANSI, 37)
         buffer += ANSI.col_bck(ANSI, 0) + "\n"
-        # print(buffer, end="")
         # top row
         for n in range(2):
             line_print = " ┌"
@@ -253,7 +253,7 @@ def draw_art():
 
 def make_coord(letters, maxnumber):
     """
-    Chooses a random coordinate.
+    Returns a random coordinate.
     """
     cha = random.choice(letters)
     num = str(round(random.randrange(1, maxnumber+1)))
