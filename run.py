@@ -108,6 +108,7 @@ class GAME():
     def validate_name(self, vname):
         """
         Check if name entered is less than 30 characters long.
+        Returns True if it is.
         """
         try:
             name = str(vname)
@@ -262,6 +263,7 @@ def make_coord(letters, maxnumber):
 def get_board_size():
     """
     Prompt the user to select a board size.
+    Returns the size.
     """
     while True:
         size = input("Please enter a number between 5 and 7:\n")
@@ -274,6 +276,7 @@ def get_board_size():
 def validate_coord(coords, size, ships, gameself):
     """
     Validate user inputted coordinates to match game formatting.
+    Returns True if it matches.
     """
     try:
         if len(coords) == 2:
@@ -300,6 +303,7 @@ def validate_coord(coords, size, ships, gameself):
 def validate_size(vsize):
     """
     Ensure the board size in an integer between 5 and 7.
+    Returns True if the conditions are satisfied.
     """
     try:
         size = int(vsize)
@@ -315,7 +319,8 @@ def validate_size(vsize):
 
 def get_name(owner):
     """
-    Prompt the user to enter their name, validate and return the name.
+    Prompt the user to enter their name, validate.
+    Returns the name.
     """
     while True:
         name = input('Please enter your name:\n')
@@ -328,7 +333,8 @@ def get_name(owner):
 
 def new_line(size):
     """
-    For use in the print_boards function, returns an interior horizontal line.
+    For use in the print_boards function.
+    Rreturns an interior horizontal line as a string.
     """
     buffer = ""
     buffer += " ├"
@@ -340,8 +346,8 @@ def new_line(size):
 
 def label_line(owner):
     """
-    For use in the print_boards function, returns a row
-    of column labels.
+    For use in the print_boards function.
+    Returns a row of column labels as a string.
     """
     buffer = ""
     buffer += " │   │"
@@ -355,7 +361,8 @@ def label_line(owner):
 
 def blank_lines(num):
     """
-    Prints empty strings to force a new line
+    Prints empty strings to force a new line.
+    Returns newline escape characters as a string
     """
     lines = ""
     for _ in range(num):
