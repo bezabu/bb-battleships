@@ -89,7 +89,7 @@ When displaying each player's game boards, for loops are used to print the chara
 # Technologies
 
 - Python was used as the programming language to make the game.
-- The [Random](https://docs.python.org/3/library/random.html#random.Random) Python module has been used to provide randomly generated .
+- The [Random](https://docs.python.org/3/library/random.html#random.Random) Python module has been used to provide randomly generated numbers.
 - GitHub has been used to store code, images and other content.
 - Heroku was used to deploy the game to the web.
 - Git was used for version control, pushing contents to GitHub.
