@@ -117,6 +117,10 @@ class GAME():
                 raise ValueError(
                     f"Name is {len(name)} characters,\nmust be 30 or less"
                 )
+            if len(name) == 0:
+                raise ValueError(
+                    f"You have not entered a name"
+                )
         except ValueError as e:
             print(f"Invalid data: {e}. Please try again.\n")
             return False
