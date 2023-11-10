@@ -103,6 +103,9 @@ When displaying each player's game boards, for loops are used to print the chara
   - Test: Enter a name that is longer than 31 characters.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
 
+  - Test: Press enter without typing.
+    - Result: The user is prompted to try again.
+
   - Test: Enter a name 30 characters or shorter.
     - Result: The input is accepted and the name entered is shown in the gameplay phase.
 
