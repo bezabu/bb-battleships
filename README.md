@@ -7,22 +7,22 @@ BATTLESHIPS is a digital reimagining of the classic strategy guessing game. It r
 
 The goal of the game is to guess the locations of the computer player's warships before it can guess yours. Players take turns calling shots and those locations are recorded on two grids.
 
-The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.com/)
+The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.com/).
 
 
 ## How to Play
 
 
-- Each player first chooses the locations of their warships, and then takes turns calling shots
+- Each player first chooses the locations of their warships, and then takes turns calling shots.
 - During the player's turn, they are prompted to enter a grid coordinate to guess. If an enemy warship is present at the coordinates, a hit is recorded on the grid and the warship is destroyed. If the grid coordinate contains no enemy warships then a miss is recorded as a blue x.
-- The game ends when one player has eliminated all of their opponent's warships
+- The game ends when one player has eliminated all of their opponent's warships.
 
 ## Features
 
 ![Starting inputs; name, board size](assets/images/starting_parameters.jpg)
 
 - A splash 'page' welcomes the player and prompts them to enter their name.
-- The user can choose between 3 sizes of game grid; 5x5, 6x6 or 7x7
+- The user can choose between 3 sizes of game grid; 5x5, 6x6 or 7x7.
 
 ![Ship placement](assets/images/ship_placement.jpg)
 
@@ -53,13 +53,13 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 ![Invalid coordinates entered](assets/images/error_coords.jpg)
 
 - Grid coordinate inputs are expected in letter-number format, for example A1, B2 and so on.
-  - Inputs that are not exactly 2 characters are rejected
-  - Inputs that are number-letter (1A, 2B etc) are rejected
-  - Inputs that are number-number (11, 22 etc) are rejected
-  - Inputs that are letter-letter (AA, BB etc) are rejected
-  - Inputs that are outside the grid (A0, B9 etc) are rejected
-  - Inputs that have already been successfully entered(previous guesses or already placed ships) are rejected
-- All rejected inputs are handled through an except block which also prints the grid. As this all takes place in a while loop it prevents lines building up underneath the grid, pushing it out of view
+  - Inputs that are not exactly 2 characters are rejected.
+  - Inputs that are number-letter (1A, 2B etc) are rejected.
+  - Inputs that are number-number (11, 22 etc) are rejected.
+  - Inputs that are letter-letter (AA, BB etc) are rejected.
+  - Inputs that are outside the grid (A0, B9 etc) are rejected.
+  - Inputs that have already been successfully entered(previous guesses or already placed ships) are rejected.
+- All rejected inputs are handled through an except block which also prints the grid. As this all takes place in a while loop it prevents lines building up underneath the grid, pushing it out of view.
 
 ![Name Validation](assets/images/name_validation.jpg)
 
@@ -69,11 +69,9 @@ The game can be accessed [here](https://bb-battleships-f22f01c35958.herokuapp.co
 
 The GAME class stores information like board size, player guesses and warship locations.
 
-Warship locations are stored as grid references. These are strings 2 characters long; the first character is an upper case letter, the second character is a number (A1, B2 etc)
+Warship locations are stored as grid references. These are strings 2 characters long; the first character is an upper case letter, the second character is a number (A1, B2 etc).
 
-Previous guesses and warship locations are stored as lists of grid references in the GAME class. When validating guesses, the input is compared to these lists.
-
-["A1", "B2"]
+Previous guesses and warship locations are stored as lists of grid references in the GAME class. When validating guesses, the input is compared to these lists ["A1", "B2"].
 
 When randomly generating locations or checking if inputs are within the bounds of the game, each character is converted to an integer to compare against the grid.
 
@@ -100,7 +98,7 @@ When displaying each player's game boards, for loops are used to print the chara
 
 # Testing
 
-- Name
+- Name:
 
   - Test: Enter a name that is longer than 31 characters.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
@@ -108,7 +106,7 @@ When displaying each player's game boards, for loops are used to print the chara
   - Test: Enter a name 30 characters or shorter.
     - Result: The input is accepted and the name entered is shown in the gameplay phase.
 
-- Board size
+- Board size:
 
   - Test: Enter a string when an integer is expected.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
@@ -119,9 +117,9 @@ When displaying each player's game boards, for loops are used to print the chara
   - Test: Enter 5, 6 or 7.
     - Result: The input is accepted and the correct board size is shown later.
 
-- Ship placement decision
+- Ship placement decision:
 
-  - Test: Enter a number when a string is .
+  - Test: Enter a number when a letter is expected.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a string without the letters Y or N.
@@ -139,7 +137,7 @@ When displaying each player's game boards, for loops are used to print the chara
   - Test: Enter "N".
     - Result: The player's warships are assigned random locations on the grid and the game begins.
 
-- Ship placement
+- Ship placement:
 
   - Test: Enter one letter or number.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
@@ -171,7 +169,7 @@ When displaying each player's game boards, for loops are used to print the chara
   - Test: Continue entering coordinates for each grid size until the game begins.
     - Result: The correct number of ships are allocated for each grid size. The "@" shown turns white once the game begins.
 
-- Calling shots
+- Calling shots:
 
   - Test: Enter one letter or number.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
@@ -208,9 +206,9 @@ When displaying each player's game boards, for loops are used to print the chara
     - Redo test:
       - Result: Registered as a player win and the player is asked if they would like to play again.
 
-- Play again decision
+- Play again decision:
 
-  - Test: Enter a number when a string is .
+  - Test: Enter a number when a letter is expected.
     - Result: The appropriate message is displayed, and the user is prompted to try again.
 
   - Test: Enter a string without the letters Y or N.
