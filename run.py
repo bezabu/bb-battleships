@@ -69,7 +69,7 @@ class GAME():
                 print("Enter ship location as letternumber,")
                 print("for example: A1")
                 for _ in range(allowed):
-                    self.print_boards()
+                    print(self.print_boards(), end="")
                     print(f"{allowed - used} ships remaining.\n")
                     self.player_ships.append(self.choose_ship())
                     used += 1
@@ -139,85 +139,88 @@ class GAME():
         """
         Display the game boards by iterating over several lines.
         """
-        print(ANSI.col_bck(ANSI, 47), end="")
-        print(ANSI.col_txt(ANSI, 30), end="")
+        buffer = ""
+        buffer += ANSI.col_bck(ANSI, 47)
+        buffer += ANSI.col_txt(ANSI, 30)
         blankspace = (((self.board_size*4)+9)*2)-24
-        print(f" {self.player_name}'s board" + self.blank * (
-            blankspace - len(self.player_name)) + "Computer's board ", end="")
-        print(ANSI.col_txt(ANSI, 37), end="")
-        print(ANSI.col_bck(ANSI, 0))
+        buffer += f" {self.player_name}'s board" + self.blank * (
+            blankspace - len(self.player_name)) + "Computer's board "
+        buffer += ANSI.col_txt(ANSI, 37)
+        buffer += ANSI.col_bck(ANSI, 0) + "\n"
+        # print(buffer, end="")
         # top row
         for n in range(2):
             line_print = " ┌"
             for m in range(self.board_size+1):
                 line_print += "───┬"
             line_print += "───┐"
-            print(ANSI.col_txt(ANSI, 32) + line_print, end="")
-        print("")
-        label_line(self)
-        label_line(self)
-        print("")
-        new_line(self.board_size)
-        new_line(self.board_size)
-        print("")
+            buffer += ANSI.col_txt(ANSI, 32) + line_print
+        buffer += "\n"
+        buffer += label_line(self)
+        buffer += label_line(self)
+        buffer += "\n"
+        buffer += new_line(self.board_size)
+        buffer += new_line(self.board_size)
+        buffer += "\n"
         # game row
         for n in range(self.board_size):
             # player
-            print(" │", end="")
-            print(ANSI.col_txt(ANSI, 37), end="")
-            print(f" {str(n+1)} ", end="")
-            print(ANSI.col_txt(ANSI, 32) + "│", end="")
+            buffer += " │"
+            buffer += ANSI.col_txt(ANSI, 37)
+            buffer += f" {str(n+1)} "
+            buffer += ANSI.col_txt(ANSI, 32) + "│"
             for m in range(self.board_size):
                 if str(self.player_board[n][m]) == "@":
                     if len(self.player_ships) < self.board_size:
-                        print(ANSI.col_txt(ANSI, 33), end="")
+                        buffer += ANSI.col_txt(ANSI, 33)
                     else:
                         # if computer has guessed here
                         b = str(self.board_label[m])+str(n+1)
                         if b in self.computer_guesses:
-                            print(ANSI.col_txt(ANSI, 31), end="")
+                            buffer += ANSI.col_txt(ANSI, 31)
                         else:
-                            print(ANSI.col_txt(ANSI, 37), end="")
+                            buffer += ANSI.col_txt(ANSI, 37)
                 elif str(self.player_board[n][m]) == "X":
-                    print(ANSI.col_txt(ANSI, 34), end="")
-                print(f" {str(self.player_board[n][m])}", end="")
-                print(ANSI.col_txt(ANSI, 32) + " │", end="")
-            print(ANSI.col_txt(ANSI, 37), end="")
-            print(f" {str(n+1)} ", end="")
-            print(ANSI.col_txt(ANSI, 32) + "│", end="")
+                    buffer += ANSI.col_txt(ANSI, 34)
+                buffer += f" {str(self.player_board[n][m])}"
+                buffer += ANSI.col_txt(ANSI, 32) + " │"
+            buffer += ANSI.col_txt(ANSI, 37)
+            buffer += f" {str(n+1)} "
+            buffer += ANSI.col_txt(ANSI, 32) + "│"
             # computer
-            print(" │", end="")
-            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
-            print(ANSI.col_txt(ANSI, 32) + "│", end="")
+            buffer += " │"
+            buffer += ANSI.col_txt(ANSI, 37) + f" {str(n+1)} "
+            buffer += ANSI.col_txt(ANSI, 32) + "│"
             for m in range(self.board_size):
                 if str(self.computer_board[n][m]) == "@":
-                    print(ANSI.col_txt(ANSI, 31), end="")
+                    buffer += ANSI.col_txt(ANSI, 31)
                 elif str(self.computer_board[n][m]) == "X":
-                    print(ANSI.col_txt(ANSI, 34), end="")
-                print(f" {str(self.computer_board[n][m])}", end="")
-                print(ANSI.col_txt(ANSI, 32) + " │", end="")
-            print(ANSI.col_txt(ANSI, 37) + f" {str(n+1)} ", end="")
-            print(ANSI.col_txt(ANSI, 32) + "│", end="")
-            print("")
-            new_line(self.board_size)
-            new_line(self.board_size)
-            print("")
+                    buffer += ANSI.col_txt(ANSI, 34)
+                buffer += f" {str(self.computer_board[n][m])}"
+                buffer += ANSI.col_txt(ANSI, 32) + " │"
+            buffer += ANSI.col_txt(ANSI, 37) + f" {str(n+1)} "
+            buffer += ANSI.col_txt(ANSI, 32) + "│"
+            buffer += "\n"
+            buffer += new_line(self.board_size)
+            buffer += new_line(self.board_size)
+            buffer += "\n"
         # bottom row
-        label_line(self)
-        label_line(self)
-        print("")
+        buffer += label_line(self)
+        buffer += label_line(self)
+        buffer += "\n"
         line_print = ""
         for n in range(2):
             line_print += " └"
             for n in range(self.board_size+1):
                 line_print += "───┴"
             line_print += "───┘"
-        print(line_print)
-        print(ANSI.col_txt(ANSI, 37), end="")
+        buffer += line_print + "\n"
+        buffer += ANSI.col_txt(ANSI, 37)
         if self.board_size == 5:
-            print("\n\n\n\n", end="")
+            buffer += "\n\n\n\n"
         elif self.board_size == 6:
-            print("\n\n", end="")
+            buffer += "\n\n"
+        return buffer
 
     def random_assign(self, ship_count):
         """
@@ -285,7 +288,7 @@ def validate_coord(coords, size, ships, gameself):
         if len(coords) != 2:
             raise ValueError(f"{coords} is not 1 letter and 1 number")
     except ValueError as e:
-        gameself.print_boards()
+        print(gameself.print_boards(), end="")
         print(f"Invalid data: {e}, please try again.\n")
         return False
     return True
@@ -324,10 +327,12 @@ def new_line(size):
     """
     For use in the print_boards function, draws an interior horizontal line.
     """
-    print(" ├", end="")
+    buffer = ""
+    buffer += " ├"
     for _ in range(size+1):
-        print("───┼", end="")
-    print("───┤", end="")
+        buffer += "───┼"
+    buffer += "───┤"
+    return buffer
 
 
 def label_line(owner):
@@ -335,12 +340,14 @@ def label_line(owner):
     For use in the print_boards function, draws a row
     of column labels.
     """
-    print(" │   │", end="")
+    buffer = ""
+    buffer += " │   │"
     for n in range(owner.board_size):
-        print(ANSI.col_txt(
-            ANSI, 37) + f" {str(owner.board_label[n])} ", end="")
-        print(ANSI.col_txt(ANSI, 32) + "│", end="")
-    print("   │", end="")
+        buffer += ANSI.col_txt(
+            ANSI, 37) + f" {str(owner.board_label[n])} "
+        buffer += ANSI.col_txt(ANSI, 32) + "│"
+    buffer += "   │"
+    return buffer
 
 
 def blank_lines(num):
@@ -423,7 +430,7 @@ def game_loop(game):
         player_summary = guess(game, True)
         computer_summary = guess(game, False)
         buffer = ""
-        game.print_boards()
+        buffer += game.print_boards()
         buffer += player_summary
         blankspace = ((4 * game.board_size) + 12) - 20
         buffer += game.blank * blankspace
@@ -431,7 +438,7 @@ def game_loop(game):
         buffer += "Your turn! Enter a location as letternumber, "
         buffer += "for example: A1\n"
         print(buffer, end="")
-    game.print_boards()
+    print(game.print_boards(), end="")
     print(game.winner)
     print("")
     play_again()
@@ -465,7 +472,7 @@ def main():
     """
     print("")
     game = GAME()
-    game.print_boards()
+    print(game.print_boards(), end="")
     print("Your turn! Enter a location as letternumber,", end="")
     print("for example: A1")
     game_loop(game)
