@@ -138,6 +138,7 @@ class GAME():
     def print_boards(self):
         """
         Display the game boards by iterating over several lines.
+        Returns the string to print.
         """
         buffer = ""
         buffer += ANSI.col_bck(ANSI, 47)
@@ -217,9 +218,9 @@ class GAME():
         buffer += line_print + "\n"
         buffer += ANSI.col_txt(ANSI, 37)
         if self.board_size == 5:
-            buffer += "\n\n\n\n"
+            buffer += blank_lines(4)
         elif self.board_size == 6:
-            buffer += "\n\n"
+            buffer += blank_lines(2)
         return buffer
 
     def random_assign(self, ship_count):
@@ -288,8 +289,10 @@ def validate_coord(coords, size, ships, gameself):
         if len(coords) != 2:
             raise ValueError(f"{coords} is not 1 letter and 1 number")
     except ValueError as e:
-        print(gameself.print_boards(), end="")
-        print(f"Invalid data: {e}, please try again.\n")
+        buffer = ""
+        buffer += gameself.print_boards()
+        buffer += f"Invalid data: {e}, please try again.\n"
+        print(buffer)
         return False
     return True
 
@@ -318,14 +321,14 @@ def get_name(owner):
         name = input('Please enter your name:\n')
         if owner.validate_name(name):
             print(f"\nHello {name}!")
-            blank_lines(2)
+            print(blank_lines(2))
             break
     return name
 
 
 def new_line(size):
     """
-    For use in the print_boards function, draws an interior horizontal line.
+    For use in the print_boards function, returns an interior horizontal line.
     """
     buffer = ""
     buffer += " ├"
@@ -337,7 +340,7 @@ def new_line(size):
 
 def label_line(owner):
     """
-    For use in the print_boards function, draws a row
+    For use in the print_boards function, returns a row
     of column labels.
     """
     buffer = ""
@@ -354,8 +357,10 @@ def blank_lines(num):
     """
     Prints empty strings to force a new line
     """
+    lines = ""
     for _ in range(num):
-        print("")
+        lines += "\n"
+    return lines
 
 
 def guess(owner, player):
@@ -456,9 +461,9 @@ def play_again():
             main()
             break
         elif 'N' in again and 'Y' not in again:
-            blank_lines(2)
+            print(blank_lines(2))
             draw_art()
-            blank_lines(5)
+            print(blank_lines(5))
             print("Thanks for playing!")
             quit()
         else:
