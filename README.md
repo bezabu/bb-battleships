@@ -120,6 +120,9 @@ When displaying each player's game boards, for loops are used to print the chara
   - Test: Enter 5, 6 or 7.
     - Result: The input is accepted and the correct board size is shown later.
 
+  - Test: Press enter without typing.
+    - Result: The user is prompted to try again.
+
 - Ship placement decision:
 
   - Test: Enter a number when a letter is expected.
@@ -139,6 +142,9 @@ When displaying each player's game boards, for loops are used to print the chara
 
   - Test: Enter "N".
     - Result: The player's warships are assigned random locations on the grid and the game begins.
+
+  - Test: Press enter without typing.
+    - Result: The user is prompted to try again.
 
 - Ship placement:
 
@@ -171,6 +177,9 @@ When displaying each player's game boards, for loops are used to print the chara
 
   - Test: Continue entering coordinates for each grid size until the game begins.
     - Result: The correct number of ships are allocated for each grid size. The "@" shown turns white once the game begins.
+
+  - Test: Press enter without typing.
+    - Result: The user is prompted to try again.
 
 - Calling shots:
 
@@ -209,6 +218,9 @@ When displaying each player's game boards, for loops are used to print the chara
     - Redo test:
       - Result: Registered as a player win and the player is asked if they would like to play again.
 
+  - Test: Press enter without typing.
+    - Result: The user is prompted to try again.
+
 - Play again decision:
 
   - Test: Enter a number when a letter is expected.
@@ -228,6 +240,9 @@ When displaying each player's game boards, for loops are used to print the chara
 
   - Test: Enter "N".
     - Result: The program quits.
+
+  - Test: Press enter without typing.
+    - Result: The user is prompted to try again.
 
 # Deployment
 
