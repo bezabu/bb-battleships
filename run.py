@@ -420,16 +420,20 @@ def game_loop(game):
     """
     print(" ")
     while game.win is False:
-        print("Your turn! Enter a location as letternumber,", end="")
-        print("for example: A1")
         player_summary = guess(game, True)
         computer_summary = guess(game, False)
+        buffer = ""
         game.print_boards()
-        print(player_summary, end="")
+        buffer += player_summary
         blankspace = ((4 * game.board_size) + 12) - 20
-        print(game.blank * blankspace, end="")
-        print(computer_summary)
+        buffer += game.blank * blankspace
+        buffer += computer_summary + "\n"
+        buffer += "Your turn! Enter a location as letternumber, "
+        buffer += "for example: A1\n"
+        print(buffer, end="")
+    game.print_boards()
     print(game.winner)
+    print("")
     play_again()
 
 
@@ -462,6 +466,8 @@ def main():
     print("")
     game = GAME()
     game.print_boards()
+    print("Your turn! Enter a location as letternumber,", end="")
+    print("for example: A1")
     game_loop(game)
 
 
